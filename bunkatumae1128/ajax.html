@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/JavaScript">
+        $(function(){ $('#link').click(function(){ $.ajax({ type: "POST", url: "http://localhost/sotuken/newtest.php", data: "content=" + $("#hoge").val(), dataType: 'json', success: function(res){ alert(res); } }); }); });
+    </script>
+</head>
+
+<body>
+    <div class="situmonform">
+        <input type="text" name="hoge" id="hoge"><br>
+        <input type="button" href="#" id="link" value="送信" /><br />
+        <!--<a href="#" id="link">クリックで送信</a>-->
+
+    </div>
+    <div>
+        <script>
+            (function() {
+                var cx = '003341137288545180779:a0u51xvm5sw';
+                var gcse = document.createElement('script');
+                gcse.type = 'text/javascript';
+                gcse.async = true;
+                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(gcse, s);
+            })();
+        </script>
+        <gcse:search></gcse:search>
+    </div>
+    <div class="mondailist">
+        <div class="q1">問題1-1:"HelloWorld"を出力しなさい。
+        </div>
+        <div class="q2">問題1-2: x=1,y=2 x+y+z=6のzの値を求めるプログラムを作成しなさい。
+        </div>
+        <div class="q3">問題1-3: int 型の変数 x に数値 11 を代入し、x の値を“x=11”のように表示するプログラムを作成しなさい。
+        </div>
+        <!--Ajaxでテーブル更新作業中onloadでやろうかな
+    <div>
+      <table class="table table-hover">
+        <th>id</th>
+        <th>内容</th>
+      </table>
+    </div>
+  -->
+        <script>
+            alert($('.q1').html());
+        </script>
+</body>
+
+</html>

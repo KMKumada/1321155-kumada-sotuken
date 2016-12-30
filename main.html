@@ -1,0 +1,150 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script type="text/JavaScript">
+        $(function(){
+              $('#link').click(function(){
+                  $.ajax({
+                    type: "POST",
+                    url: "http://localhost/sotuken/main_form.php",
+                    data: "content=" + $("#hoge").val(),
+                    dataType: 'json',
+                    success:
+                      function(res){
+                        alert(res);
+                      }
+                  });
+              });
+        });
+        $(function (){
+          $('#result_mondai tbody').load('db_select_mondai.php');
+          $('#result_situmon tbody').load('db_select_situmon.php');
+        });
+      $(function(){
+          $('#elasticsearch').click(function(){
+              $.ajax({
+                type: "POST",
+                url: "http://localhost/sotuken/new_ela.php",
+                data:"content="+$("#hoge").val(),
+                dataType:'json',
+                success:
+                  function(res){
+                    //alert(res);
+                    //alert(JSON.parse(res));
+                    var jso=JSON.stringify(res);
+                    alert(jso);
+                    //javascriptで[object Object]が返ってくるため
+                  }
+              });
+          });
+        });
+        ////////////////////直接Elasticsearch検索///////////////////////////////
+        /*$(function(){
+          $('#elasticsearch').click(function(){
+                  var data = {
+                    query: {
+                        match: {
+                            _all: $('#hoge').val()
+                        }
+                    },
+                    fields: '_id'
+                };
+
+        $.ajax({
+                    url: 'http://localhost:9200/testja/test/_search',
+                    type: 'POST',
+                    //contentType: 'application/json; charset=UTF-8',
+                    crossDomain: true,
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        var data = response.hits.hits;
+                        var doc_ids = [];
+                        var source = null;
+                        var content = '';
+
+                        if (data.length > 0) {
+                            for (var i = 0; i < data.length; i++) {
+                                source = data[i].fields;
+                                doc_ids.push(source._id);
+                                content = content + ' ' + source._id + '<br />';
+                            }
+
+                            $('#res').removeClass('text-error').addClass('text-success').html(content);
+                        } else {
+                            $('#res').removeClass('text-success').addClass('text-error').html('No results found.');
+                        }
+
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        var jso = jQuery.parseJSON(jqXHR.responseText);
+                        error_note('section', 'error', '(' + jqXHR.status + ') ' + errorThrown + ' --<br />' + jso.error);
+                    }
+                });
+                  });
+
+        });*/
+    </script>
+</head>
+
+<body>
+    <div class="situmonform">
+        <input type="text" name="hoge" id="hoge"><br>
+        <input type="button" href="#" id="link" value="送信" /><br />
+        <input type="button" href="#" id="elasticsearch" value="GET" /><br />
+        <!--<a href="#" id="link">クリックで送信</a>-->
+    </div>
+    <div>
+        <script>
+            (function() {
+                var cx = '003341137288545180779:a0u51xvm5sw';
+                var gcse = document.createElement('script');
+                gcse.type = 'text/javascript';
+                gcse.async = true;
+                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(gcse, s);
+            })();
+        </script>
+        <gcse:search></gcse:search>
+    </div>
+    <div class="btn-group"><!--問題文の数だけ生成したい-->
+            <button class="btn btn-default "id ="mondai1">1</button>
+            <button class="btn btn-default "id ="mondai2">2</button>
+            <button class="btn btn-default "id ="mondai3">3</button>
+    </div>
+    <div id="result_mondai"><!--ここに要素を自動更新-->
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>mondai</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+    </div>
+    <div id="result_situmon"><!--ここに要素を自動更新-->
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>situmon</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
