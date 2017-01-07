@@ -1,29 +1,27 @@
 <?php
-//入力フォームからは受け取れています。確認用にコメントアウトしてます
- /*if ($_POST) {
-      $replyData = $_POST['content'];
-*/
-
+require 'vendor/autoload.php';
+use Elasticsearch\ClientBuilder;
+//名前空間の宣言は必ず変数よりも先に記述
+ if ($_POST) {
+//Ajaxで入力フォームの値を取得
+$replyData = $_POST['content'];
+$pen=$replyData;//代理の変数を用意しています
+$result="'".$pen."'";//シングルクォーテーションで囲む処理
 //必ずelasticsearchの起動を確認してください
-//elasticsearch起動する記述がありませんでした12/31
-      require 'vendor/autoload.php';
-      use Elasticsearch\ClientBuilder;
-      //クラスの初期化
+
       $client = ClientBuilder::create()->build();
-      //new instance create
       $params = [
           'index' => 'testja',
           'body' => [
               'query' => [
                   'match' => [
-                      'description' =>'渋め'
-                      //変数でにする予定です12/31
+                      'description' =>$result
                   ]
               ]
           ]
       ];
       $response = $client->search($params);
-
       echo json_encode($response, JSON_FORCE_OBJECT);
       //連想配列なのでJavaScriptで返すときは要注意
+    }
 ?>
