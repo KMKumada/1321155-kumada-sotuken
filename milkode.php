@@ -1,7 +1,7 @@
 <?php
 
-$text = $mecab_intext;
-$exe_path = 'C:/"Program Files (x86)"/MeCab/bin/mecab.exe -O wakati';
+//$text = $mecab_intext;
+$exe_path = 'milk web';
 //遅いけどアラートもきちんとでます。
 //$exe_path = '"C:/Program Files (x86)/MeCab/bin/mecab.exe"';
 //これがもとのやつ
@@ -15,7 +15,6 @@ if (is_resource($process)) {
     $result = stream_get_contents($pipes[1]);
     fclose($pipes[1]);
     proc_close($process);
-    require('mecab_insert.php');
 }
 /*ob_start();
 

@@ -24,7 +24,7 @@
           $('#result_mondai tbody').load('db_select_mondai.php');
           $('#result_situmon tbody').load('db_select_situmon.php');
         });
-      $(function(){
+         $(function(){
           $('#elasticsearch').click(function(){
               $.ajax({
                 type: "POST",
@@ -33,11 +33,33 @@
                 dataType:'json',
                 success:
                   function(res){
-                    //alert(res);
-                    //alert(JSON.parse(res));
-                    var jso=JSON.stringify(res);
-                    alert(jso);
-                    //javascriptで[object Object]が返ってくるため
+                    //パースはオブジェクトにするものだから最初からオブジェクトのものにはできません
+
+                    //オブジェクトからJSONネスト構造の特定の要素の最大値を取得
+                    var i =res.hits.total;
+                    //オブジェクトを表示用に文字列に変換
+                    var tem=JSON.stringify(i);
+                    alert("要素の数は"+tem+"個です。");//これで１０が返って来ました。
+
+                    //要素の取得と表示
+                    for(j=0;j<tem;j++){
+                      var description=JSON.stringify(res.hits.hits[j]._source.description);
+                      var name=JSON.stringify(res.hits.hits[j]._source.name);
+                      alert(description);
+                      alert(name);
+                      $('#i').append("<p>説明:"+description+name+"</p>");//タグに追加できました。
+                    }
+                      /*
+                    console.log(res);
+                    $('#p').append("<p>"+res+"</p>");//[object Object]
+                    var jso=JSON.stringify(res);//文字列に変換
+                    console.log(jso);
+                      $('#p').append("<p>"+jso+"</p>");//文字列なのでappendできる
+                    var to=JSON.parse(jso);//文字列をパース
+                    console.log(to);
+                      $('#p').append("<p>"+to+"</p>");//[object Object]
+                    ///////なぜパースできないのかというと引数に文字列ではなくオブジェクト入ってるよ
+                    */
                   }
               });
           });
@@ -69,62 +91,23 @@
                     dataType:'json',
                     success:
                       function(res){
-                        //alert(res);
-                        //alert(JSON.parse(res));
-                        var jso=JSON.stringify(res);
-                        alert(jso);
-                        //javascriptで[object Object]が返ってくるため
+                        var pa =JSON.parse(res);
+                        //JSON文字列からJavaScriptのオブジェクトに変更
+                        var len =pa.items.length;
+                        alert(res);//17時リトライ
+                        //$('#p').append("<p>挿入された要素です。</p>");
+                       /*for(var i=0;i<len;i++){
+                             var title = pa.items[i].title;
+                             var link  = pa.items[i].link;
+                          // $('#p').append("<p>挿入された要素です。</p>");
+                             //console.log(title);
+                             //console.log(link);
+                            // $('#sampledata').append("<p>タイトル:"+pa.items[i].title+pa.items[i].link+"</p>");
+                          }*/
                       }
                   });
               });
             });
-        ////////////////////直接Elasticsearch検索///////////////////////////////
-        /*$(function(){
-          $('#elasticsearch').click(function(){
-                  var data = {
-                    query: {
-                        match: {
-                            _all: $('#hoge').val()
-                        }
-                    },
-                    fields: '_id'
-                };
-
-        $.ajax({
-                    url: 'http://localhost:9200/testja/test/_search',
-                    type: 'POST',
-                    //contentType: 'application/json; charset=UTF-8',
-                    crossDomain: true,
-                    dataType: 'json',
-                    data: JSON.stringify(data),
-                    success: function(response) {
-                        var data = response.hits.hits;
-                        var doc_ids = [];
-                        var source = null;
-                        var content = '';
-
-                        if (data.length > 0) {
-                            for (var i = 0; i < data.length; i++) {
-                                source = data[i].fields;
-                                doc_ids.push(source._id);
-                                content = content + ' ' + source._id + '<br />';
-                            }
-
-                            $('#res').removeClass('text-error').addClass('text-success').html(content);
-                        } else {
-                            $('#res').removeClass('text-success').addClass('text-error').html('No results found.');
-                        }
-
-
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        var jso = jQuery.parseJSON(jqXHR.responseText);
-                        error_note('section', 'error', '(' + jqXHR.status + ') ' + errorThrown + ' --<br />' + jso.error);
-                    }
-                });
-                  });
-
-        });*/
     </script>
 </head>
 
@@ -134,6 +117,7 @@
         <input type="button" href="#" id="link" value="送信" /><br />
         <input type="button" href="#" id="elasticsearch" value="ElasticSearch" /><br />
         <input type="button" href="#" id="milkode" value="Milkode" /><br />
+        <input type="button" href="#" id="googlesearch" value="Googleカスタム検索" /><br />
         <!--<a href="#" id="link">クリックで送信</a>-->
     </div>
     <div>
@@ -149,6 +133,9 @@
             })();
         </script>
         <gcse:search></gcse:search>
+    </div>
+    <div id="i" style="background-color:red;">
+      <p>ここに表示するよ</p>
     </div>
     <div class="btn-group"><!--問題文の数だけ生成したい-->
             <button class="btn btn-default "id ="mondai1">1</button>
@@ -180,6 +167,9 @@
 
           </tbody>
         </table>
+    </div>
+    <div id="p">
+      <p>ここに結果表示してみる</p>
     </div>
 
 </body>

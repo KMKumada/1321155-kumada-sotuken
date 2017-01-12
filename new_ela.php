@@ -21,6 +21,18 @@ $result="'".$pen."'";//シングルクォーテーションで囲む処理
           ]
       ];
       $response = $client->search($params);
+      //echo $response;
+      $pam= json_encode($response, JSON_FORCE_OBJECT);
+      ob_start();
+
+      print_r($pam);
+
+      $buffer = ob_get_contents();
+      ob_end_clean();
+
+      $fp = fopen('elasticsearch.txt', 'w');
+      fputs($fp, $buffer);
+      fclose($fp);
       echo json_encode($response, JSON_FORCE_OBJECT);
       //連想配列なのでJavaScriptで返すときは要注意
     }
