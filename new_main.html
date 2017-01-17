@@ -1,10 +1,16 @@
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--上2行の追加-->
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
     <script type="text/JavaScript">
         $(function(){
               $('#link').click(function(){
@@ -24,7 +30,7 @@
           $('#result_mondai tbody').load('db_select_mondai.php');
           $('#result_situmon tbody').load('db_select_situmon.php');
         });
-         $(function(){
+        $(function(){
           $('#elasticsearch').click(function(){
               $.ajax({
                 type: "POST",
@@ -47,7 +53,10 @@
                       var name=JSON.stringify(res.hits.hits[j]._source.name);
                       alert(description);
                       alert(name);
-                      $('#i').append("<p>説明:"+description+name+"</p>");//タグに追加できました。
+                      var addText ="ID"+j+"\r\n"+"説明文"+":"+description+"\r\n"+"名前"+":"+name+"\r\n";
+                      var getData = $("#syuturyoku").val();
+                       $("#syuturyoku").val( getData + addText );
+                      //$('#i').append("<p>説明:"+description+name+"</p>");//タグに追加できました。
                     }
                       /*
                     console.log(res);
@@ -69,15 +78,15 @@
                 $.ajax({
                   type: "POST",
                   url: "http://localhost/sotuken/milkode.php",
+                  //url: "http://localhost:9292/home?query=at",
                   data:"content="+$("#hoge").val(),
                   dataType:'json',
                   success:
                     function(res){
-                      //alert(res);
-                      //alert(JSON.parse(res));
-                      var jso=JSON.stringify(res);
-                      alert(jso);
-                      //javascriptで[object Object]が返ってくるため
+                    //返ってきているデータタイプが不明おそらくJSON文字列
+                      var addText ="検索結果："+res+"\r\n";
+                      var getData = $("#syuturyoku").val();
+                       $("#syuturyoku").val( getData + addText );
                     }
                 });
             });
@@ -93,17 +102,21 @@
                       function(res){
                         var pa =JSON.parse(res);
                         //JSON文字列からJavaScriptのオブジェクトに変更
+                        console.log(res);
+                        console.log(pa);
                         var len =pa.items.length;
-                        alert(res);//17時リトライ
-                        //$('#p').append("<p>挿入された要素です。</p>");
-                       /*for(var i=0;i<len;i++){
-                             var title = pa.items[i].title;
-                             var link  = pa.items[i].link;
-                          // $('#p').append("<p>挿入された要素です。</p>");
-                             //console.log(title);
-                             //console.log(link);
-                            // $('#sampledata').append("<p>タイトル:"+pa.items[i].title+pa.items[i].link+"</p>");
-                          }*/
+
+                        for(j=0;j<len;j++){
+                          var title=JSON.stringify(pa.items[j].title);
+                          var link=JSON.stringify(pa.items[j].link);
+                          alert(title);
+                          alert(link);
+                          var addText ="ID"+j+"\r\n"+"タイトル"+":"+title+"\r\n"+"URL"+":"+link+"\r\n";
+                          var getData = $("#syuturyoku").val();
+                           $("#syuturyoku").val( getData + addText );
+                          //$('#i').append("<p>説明:"+description+name+"</p>");//タグに追加できました。
+                        }
+
                       }
                   });
               });
@@ -112,66 +125,89 @@
 </head>
 
 <body>
-    <div class="situmonform">
-        <input type="text" name="hoge" id="hoge"><br>
-        <input type="button" href="#" id="link" value="送信" /><br />
-        <input type="button" href="#" id="elasticsearch" value="ElasticSearch" /><br />
-        <input type="button" href="#" id="milkode" value="Milkode" /><br />
-        <input type="button" href="#" id="googlesearch" value="Googleカスタム検索" /><br />
-        <!--<a href="#" id="link">クリックで送信</a>-->
+  <div class="container-fluid" ><!--コンテナ全体-->
+    <div class="row"style="margin-bottom:5px;"><!--上段ヘッダーメニュー-->
+      <font size="5" color="black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;検索ページ</font>
+			<div class="col-xs-12">
+				<font size="3" color="black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User:</font>
+				<font color="black"><i class="fa fa-user"></i></font>
+				<select name="student_id" id="student_selector">
+					<option value="">名前を選択してください</option>
+				</select>
+				<font size="3" color="black">Work:</font>
+				<font color="black"><i class="fa fa-archive"></i></font>
+				<select name="" id="">
+					<option value="">選択中の課題</option>
+				</select>
+			</div>
     </div>
-    <div>
-        <script>
-            (function() {
-                var cx = '003341137288545180779:a0u51xvm5sw';
-                var gcse = document.createElement('script');
-                gcse.type = 'text/javascript';
-                gcse.async = true;
-                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(gcse, s);
-            })();
-        </script>
-        <gcse:search></gcse:search>
-    </div>
-    <div id="i" style="background-color:red;">
-      <p>ここに表示するよ</p>
-    </div>
-    <div class="btn-group"><!--問題文の数だけ生成したい-->
-            <button class="btn btn-default "id ="mondai1">1</button>
-            <button class="btn btn-default "id ="mondai2">2</button>
-            <button class="btn btn-default "id ="mondai3">3</button>
-    </div>
-    <div id="result_mondai"><!--ここに要素を自動更新-->
-      <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>mondai</th>
-            </tr>
-          </thead>
-          <tbody>
+    <div class="row-10"><!--中段カラムー-->
 
-          </tbody>
-        </table>
-    </div>
-    <div id="result_situmon"><!--ここに要素を自動更新-->
-      <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>situmon</th>
-            </tr>
-          </thead>
-          <tbody>
+      <div class="col-md-3 left"><!--左側-->
+        <div class="row">
+        	<div class="col-xs-12">
+        <div id="result_mondai"><!--ここに要素を自動更新-->
+          <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>mondai</th>
+                </tr>
+              </thead>
+              <tbody>
 
-          </tbody>
-        </table>
-    </div>
-    <div id="p">
-      <p>ここに結果表示してみる</p>
-    </div>
+              </tbody>
+            </table>
+          </div>
+        <div id="result_situmon"><!--ここに要素を自動更新-->
+          <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>situmon</th>
+                </tr>
+              </thead>
+              <tbody>
 
+              </tbody>
+            </table>
+        </div>
+      </div>
+        </div>
+      </div>
+
+
+
+      <div class="col-md-6 center"><!--真ん中-->
+        <div class="row">
+          <div class="col-xs-12">
+        <div class="situmonform">
+            <input type="text" name="hoge"id="hoge"class="form-control" placeholder=".col-xs-12"><br>
+            <input type="button" href="#" id="link" value="質問文送信（仮）" />
+            <input type="button" href="#" id="elasticsearch" value="ElasticSearch" />
+            <input type="button" href="#" id="milkode" value="Milkode" />
+            <input type="button" href="#" id="googlesearch" value="Googleカスタム検索" />
+            <!--<a href="#" id="link">クリックで送信</a>-->
+        </div>
+        <div id="io" style="background-color:red;">
+          <div class="col-xs-12"style="padding: 3px;">
+                <textarea class="form-control  input-sm" name="syuturyoku"rows="50" id="syuturyoku" placeholder="出力エリア"></textarea>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+
+      <div class="col-md-3 right"><!--右側-->
+          <div class="row">
+            <div class="col-xs-12">
+              <p>とりあえず</p>
+            </div>
+          </div>
+      </div>
+
+    </div><!--中段カラム-->
+  </div><!--コンテナ-->
 </body>
 
 </html>
