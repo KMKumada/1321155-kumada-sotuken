@@ -93,7 +93,7 @@ foreach($ret['items'] as $value){
 
     $num++;
 }*/
-ob_start();
+/*ob_start();
 
 print_r($ret);
 
@@ -102,7 +102,7 @@ ob_end_clean();
 
 $fp = fopen('google_output3.txt', 'w');
 fputs($fp, $buffer);
-fclose($fp);
+fclose($fp);*/
   echo json_encode($retJson, JSON_FORCE_OBJECT);
 }
 ?>

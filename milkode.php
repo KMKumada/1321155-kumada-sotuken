@@ -9,7 +9,9 @@ if($_POST){
         0 => array('pipe', 'r'),
         1 => array('pipe', 'w'),
   );
-  $process = proc_open($exe_path, $descriptorspec, $pipes);
+  $cwd = '/xampp/htdocs/sotuken/milkodedata/';
+  //パッケージ登録されたディレクトリに移動しないとエラー出ますnot find package
+  $process = proc_open($exe_path, $descriptorspec, $pipes,$cwd);
   //コマンドを実行し、入出力用にファイルポインタを開く
   //引数は左から　$cmd $descriptorspec $pipes
   //実行されるコマンド　数値添え字配列０が標準入力　１が標準出力

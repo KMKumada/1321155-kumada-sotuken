@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--上2行の追加-->
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -34,7 +35,7 @@
           $('#elasticsearch').click(function(){
               $.ajax({
                 type: "POST",
-                url: "http://localhost/sotuken/new_ela.php",
+                url: "http://localhost/sotuken/elasticsearch.php",
                 data:"content="+$("#hoge").val(),
                 dataType:'json',
                 success:
@@ -45,14 +46,14 @@
                     var i =res.hits.total;
                     //オブジェクトを表示用に文字列に変換
                     var tem=JSON.stringify(i);
-                    alert("要素の数は"+tem+"個です。");//これで１０が返って来ました。
+                    console.log("要素の数は"+tem+"個です。");//１０個までしか出力できない
 
                     //要素の取得と表示
                     for(j=0;j<tem;j++){
                       var description=JSON.stringify(res.hits.hits[j]._source.description);
                       var name=JSON.stringify(res.hits.hits[j]._source.name);
-                      alert(description);
-                      alert(name);
+                      //alert(description);
+                      //alert(name);
                       var addText ="ID"+j+"\r\n"+"説明文"+":"+description+"\r\n"+"名前"+":"+name+"\r\n";
                       var getData = $("#syuturyoku").val();
                        $("#syuturyoku").val( getData + addText );
@@ -83,8 +84,11 @@
                   dataType:'json',
                   success:
                     function(res){
+                    //  var pa =JSON.parse(res);
+                    //  console.log(pa);
                     //返ってきているデータタイプが不明おそらくJSON文字列
-                      var addText ="検索結果："+res+"\r\n";
+                     console.log(res);
+                      var addText ="検索結果："+res;
                       var getData = $("#syuturyoku").val();
                        $("#syuturyoku").val( getData + addText );
                     }
@@ -103,14 +107,12 @@
                         var pa =JSON.parse(res);
                         //JSON文字列からJavaScriptのオブジェクトに変更
                         console.log(res);
-                        console.log(pa);
                         var len =pa.items.length;
 
                         for(j=0;j<len;j++){
                           var title=JSON.stringify(pa.items[j].title);
                           var link=JSON.stringify(pa.items[j].link);
-                          alert(title);
-                          alert(link);
+
                           var addText ="ID"+j+"\r\n"+"タイトル"+":"+title+"\r\n"+"URL"+":"+link+"\r\n";
                           var getData = $("#syuturyoku").val();
                            $("#syuturyoku").val( getData + addText );
@@ -129,7 +131,7 @@
     <div class="row"style="margin-bottom:5px;"><!--上段ヘッダーメニュー-->
       <font size="5" color="black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;検索ページ</font>
 			<div class="col-xs-12">
-				<font size="3" color="black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User:</font>
+			<!--	<font size="3" color="black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User:</font>
 				<font color="black"><i class="fa fa-user"></i></font>
 				<select name="student_id" id="student_selector">
 					<option value="">名前を選択してください</option>
@@ -139,6 +141,7 @@
 				<select name="" id="">
 					<option value="">選択中の課題</option>
 				</select>
+      -->
 			</div>
     </div>
     <div class="row-10"><!--中段カラムー-->
@@ -182,7 +185,7 @@
         <div class="row">
           <div class="col-xs-12">
         <div class="situmonform">
-            <input type="text" name="hoge"id="hoge"class="form-control" placeholder=".col-xs-12"><br>
+            <input type = "text" name="hoge"id="hoge"class="form-control" placeholder=".col-xs-12"><br>
             <input type="button" href="#" id="link" value="質問文送信（仮）" />
             <input type="button" href="#" id="elasticsearch" value="ElasticSearch" />
             <input type="button" href="#" id="milkode" value="Milkode" />
@@ -201,7 +204,7 @@
       <div class="col-md-3 right"><!--右側-->
           <div class="row">
             <div class="col-xs-12">
-              <p>とりあえず</p>
+              <!--<p>とりあえず</p>-->
             </div>
           </div>
       </div>
