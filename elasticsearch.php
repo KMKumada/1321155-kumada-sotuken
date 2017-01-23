@@ -11,7 +11,7 @@ $result="'".$pen."'";//シングルクォーテーションで囲む処理
 
       $client = ClientBuilder::create()->build();
       $params = [
-          'index' => 'testja',
+          'index' => 'sampledata',//testja
           'body' => [
               'query' => [
                   'match' => [
@@ -35,6 +35,7 @@ $result="'".$pen."'";//シングルクォーテーションで囲む処理
       fclose($fp);
       */
       echo json_encode($response, JSON_FORCE_OBJECT);
+      //JSON_FORCE_OBJECT
       //連想配列なのでJavaScriptで返すときは要注意
     }
 ?>

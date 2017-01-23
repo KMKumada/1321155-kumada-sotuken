@@ -27,6 +27,23 @@
                   });
               });
         });
+        $(function(){
+              $('#confirm').click(function(){
+                  $.ajax({
+                    type: "POST",
+                    url: "http://localhost/sotuken/curl.php",
+                    data: "content=" + $("#hoge").val(),
+                    dataType: 'json',
+                    success:
+                    function(res){
+                     console.log(res);
+                      var addText ="デバッグ結果："+res;
+                      var getData = $("#syuturyoku").val();
+                       $("#syuturyoku").val( getData + addText );
+                    }
+                  });
+              });
+        });
         $(function (){
           $('#result_mondai tbody').load('db_select_mondai.php');
           $('#result_situmon tbody').load('db_select_situmon.php');
@@ -46,15 +63,18 @@
                     var i =res.hits.total;
                     //オブジェクトを表示用に文字列に変換
                     var tem=JSON.stringify(i);
-                    console.log("要素の数は"+tem+"個です。");//１０個までしか出力できない
+                    if(tem==0){
+                       $("#syuturyoku").val("検索結果は0件です.");
+                    }
 
+                    console.log(res);
                     //要素の取得と表示
+                       $("#syuturyoku").val(" ");
                     for(j=0;j<tem;j++){
-                      var description=JSON.stringify(res.hits.hits[j]._source.description);
-                      var name=JSON.stringify(res.hits.hits[j]._source.name);
-                      //alert(description);
-                      //alert(name);
-                      var addText ="ID"+j+"\r\n"+"説明文"+":"+description+"\r\n"+"名前"+":"+name+"\r\n";
+                      var description=JSON.stringify(res.hits.hits[j]._source.description);//説明
+                      var kougi=JSON.stringify(res.hits.hits[j]._source.kougi);//講義番号
+                      var page_id=JSON.stringify(res.hits.hits[j]._source.page_id);//ページ番号
+                      var addText ="ID："+j+"\r\n"+"講義："+kougi+"\r\n"+"ページ番号："+page_id+"\r\n"+"説明文："+"\r\n"+description+"\r\n";
                       var getData = $("#syuturyoku").val();
                        $("#syuturyoku").val( getData + addText );
                       //$('#i').append("<p>説明:"+description+name+"</p>");//タグに追加できました。
@@ -185,8 +205,9 @@
         <div class="row">
           <div class="col-xs-12">
         <div class="situmonform">
-            <input type = "text" name="hoge"id="hoge"class="form-control" placeholder=".col-xs-12"><br>
-            <input type="button" href="#" id="link" value="質問文送信（仮）" />
+            <input type = "text" name="hoge"id="hoge"class="form-control"><br><!--placeholder=".col-xs-12"-->
+            <input type="button" href="#" id="link" value="質問文送信" />
+            <input type="button" href="#" id="confirm" value="curlコマンド（デバッグ用）" />
             <input type="button" href="#" id="elasticsearch" value="ElasticSearch" />
             <input type="button" href="#" id="milkode" value="Milkode" />
             <input type="button" href="#" id="googlesearch" value="Googleカスタム検索" />

@@ -1,0 +1,22 @@
+{
+  "testdata" : {
+    "mappings" : {
+      "kyoukasyo" : {
+        "properties" : {
+          "description" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "page_id" : {
+            "type" : "long"
+          }
+        }
+      }
+    }
+  }
+}

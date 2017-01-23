@@ -1,0 +1,477 @@
+{"index":{}}
+{"kougi":"第2回","page_id":1,"description":"平成xx年度｢JAVA言語｣第2回JAVAを学んで今後に生かそう神奈川工科大学情報学部情報工学科"}
+{"index":{}}
+{"kougi":"第2回","page_id":2,"description":"[2.6次の例題]コンストラクタとメソッドの多重定義(オーバーロード)まず、リスト2.2(T22.java)を動かし、そのプログラムの詳細を調べてみよう。(実行してください。)"}
+{"index":{}}
+{"kougi":"第2回","page_id":3,"description":"public classT22{public static void main(String[] args){ int x=300,y=200,d=100;TutleFrame f =new TurtleFrame(700,500);Turtle m = new Turtle(x,y,180);Turtle m1 = new Turtle(x+d,y+d,0);java.awt.Color c= new java.awt.Color(255,0,0);}"}
+{"index":{}}
+{"kougi":"第2回","page_id":3,"description":"m1.setColor(c);f.add(m);f.add(m1);m.fd(d);m1.fd(d);m.lt(90);m1.lt(90);d=d/2;m.fd(d);m1.fd(d);m1.moveTo(m);}}"}
+{"index":{}}
+{"kougi":"第2回","page_id":4,"description":"(1)変数の型:プリミティブ型と参照型,プリミティブ型変数には、整数値などが直接格納されるが、参照型変数はそうではない！"}
+{"index":{}}
+{"kougi":"第2回","page_id":5,"description":"(2)コンストラクタ:クラスからオブジェクト(インスタンス)を生成するためのもの。クラス名と同一名で、引数が異なるものも使われる。new　演算子の後ろに続けて書かれる。"}
+{"idnex":{}}
+{"kougi":"第2回","page_id":5,"description":"TurtleFrame f = new TurtleFrame(700,500);700x500のTurtleFrameオブジェクトを生成。引数２つのコンストラクタTurtleFrame f1 = new TurtleFrame();デフォルトコンストラクタTurtle m = new Turtle(x,y,180);座標(x,y)に、180度の角度でTurtleオブジェクトを生成。引数３つのコンストラクタTurtle m1= new Turtle();デフォルトコンストラクタ→P.14に、両クラスのコンストラクタの仕様があるので、再確認！"}
+{"index":{}}
+{"kougi":"第2回","page_id":6,"description":"直ぐやってみよう!(1-1):T22.javaでは、700x500のサイズのTurtleFrameオブジェクトを生成している。これを改め、デフォルトコンストラクタを使って、TurtleFrameオブジェクトを生成しなさい。そして、下図のような結果が得られるようにしなさい。そのためには、プリミティブ変数x,yの値も変更する必要がある。"}
+{"index":{}}
+{"kougi":"第2回","page_id":7,"description":"(5)メソッドの多重定義(オーバーロード):P.14のTurtleクラスのメソッドmoveToとして、引数の個数や型が異なる3つが多重に定義されている。"}
+{"index":{}}
+{"kougi":"第2回","page_id":7,"description":"int moveTo(int x,int y)(x,y)という座標の方向を向き、(x,y)まで進む。動いた距離を返す。"}
+{"index":{}}
+{"kougi":"第2回","page_id":7,"description":"int moveTO(Turtle t)タートルtの方向を向き、tと同じ座標まで進む。動いた距離を返す。"}
+{"index":{}}
+{"kougi":"第2回","page_id":7,"description":"int moveTO(int x,int y,int angle)(x,y)という座標の方向を向き、(x,y)まで進んだ後、angleの方向を向く。動いた距離を返す。"}
+{"index":{}}
+{"kougi":"第2回","page_id":7,"description":"T22.javaでは2番目のものを使っている。 18行目　m1.moveTO(m);"}
+{"index":{}}
+{"kougi":"第2回","page_id":8,"description":"18 m1.moveTo(m);mがm1の真上でなくても、つまり直角でなくても、斜め方向にいても、図のように、m1はmの所へ行くことを確認しなさい。"}
+{"index":{}}
+{"kougi":"第2回","page_id":9,"description":"値を返すメソッドとインスタンス変数まず,リスト2.3(T23.java)を動かし、そのプログラムの詳細を調べてみよう。(実行してください。)"}
+{"index":{}}
+{"kougi":"第2回","page_id":10,"description":"1 public class T23 { 2 public static void main(String[] args){3 int d = 100, x, y, a;4 TurtleFrame f = new TurtleFrame();5 Turtle m = new Turtle(200,300,0);6 f.add(m);7 m.fd(d);8 x = m.getX();9 y = m.getY();10 a = m.getAngle() - 45;11 Turtle m1 = new Turtle(x, y, a);12 f.add(m1);13 m1.fd(d);14 Turtle m2 = m.clone();15 f.add(m2);16 m.rt(45);17 m.fd(d);18 m2.tcolor = new java.awt.Color(0,255,255);19 m2.tscale = m2.tscale * 4;20 m2.fd(d);21 }22}"}
+{"index":{}}
+{"kougi":"第2回","page_id":11,"description":"T23.javaには、３匹の亀(Turtle)オブジェクトがいますが、それぞれ生成の仕方が異なることに注意。(1)5: Turtle m = new Turtle(200,300,0);座標(200,300)に北向きのTurtleオブジェクトmを生成(2)11: Turtle m1 =new Turtle(x,y,a);上記(1)と同じだが、引数に変数を使用。上記オブジェクトmをもとに生成するのでx=m.getX(); //mのX座標を得るx=m.getY(); //mのy座標を得るa=m.getAngle()-45; //mの角度をもとにする(3)14: Turtle m2 =m.clone();オブジェクトmと同じ状態のオブジェクトm2を生成する。すなわち、クローン(clonseメソッド)を呼び出す。"}
+{"index":{}}
+{"kougi":"第2回","page_id":12,"description":"(1)値を返すメソッド例えば、x=m.getX();のように、オブジェクトmのメソッドgetX() が値(整数値)を返す場合の事です。一方、Turtle m2 =m.clone();のように、メソッドclone()が返す値はオブジェクト(Turtleクラスの)である場合もあります!"}
+{"index":{}}
+{"kougi":"第2回","page_id":13,"description":"3匹の亀がそれぞれインスタンス変数tcolor,tscaleを持っている。tcolor葉参照型、tscaleはプリミティブ型。(T23.Javaの実行後の状況)"}
+{"index":{}}
+{"kougi":"第2回","page_id":14,"description":"オブジェクトは内部に状態を持つ。インスタンス変数として保持。前出のように、tscale、tcolorはTurtleのインスタンス変数の例である。しかし、非公開のインスタンス変数もある。(現在の座標、角度、自分が載っているTurtleFrameオブジェクトなど)。オブジェクトは、インスタンスメソッドの呼び出しに応じて処理を実行する。"}
+{"index":{}}
+{"kougi":"第2回","page_id":14,"description":"以下のmとm1は同一のオブジェクトを指す。turtle m =new Turtle(); Turtle m1 =m;一方、下記のプリミティブ型x,y,zについてはそうではない。状況は異なる。int x=50;int y =20+30; int z=x;"}
+{"index":{}}
+{"kougi":"第2回","page_id":14,"description":"参照型変数に値が入っていないことを特別な値nullで示す。Turtle m=null;"}
+{"index":{}}
+{"kougi":"第2回","page_id":15,"description":"[3.1パッケージとimport宣言]:前出の色クラスjava.awt.Colorは標準クラスライブラリに属する。他にも多様のクラスが含まれる。"}
+{"index":{}}
+{"kougi":"第2回","page_id":15,"description":"それらを管理するためディレクトリに相当するパッケージを使う。例えば、java.awt.Colorは、java.awtというパッケージに属するクラスColorの意味。"}
+{"index":{}}
+{"kougi":"第2回","page_id":15,"description":"このようなパッケージをimport文で宣言すれば、以下のようにそれに属するクラスを参照できる。先頭で以下のように書く:import java.awt.Color;またはimport java.awt.*;そうすると、以下のように簡潔に書ける:Color c=new Color(255,0,0);"}
+{"index":{}}
+{"kougi":"第2回","page_id":16,"description":"直ぐやってみよう!(3-1):T22.javaを、上のスライドの説明のように、import文を利用するものに、書き換えて実行しなさい。"}
+{"index":{}}
+{"kougi":"第2回","page_id":16,"description":"直ぐやってみよう!(3-2):下記URLのjavaドキュメントの中から、java.awt.Colorクラスの仕様を見て、Color(int r, int g,int b)というコンストラクタの説明を探しなさい。(次頁スライドのようなもの)"}
+{"index":{}}
+{"kougi":"第2回","page_id":16,"description":"http://docs.oracle.com/javase/jp/8/docs/api/index.html"}
+{"index":{}}
+{"kougi":"第2回","page_id":17,"description":"java.awtパッケージのColorクラスのコンストラクタの説明"}
+{"index":{}}
+{"kougi":"第2回","page_id":17,"description":"Color(int r,int g,int b) 範囲(0-255)の指定された赤、緑、青の値を使って、不透明なsRGBカラーを生成します。"}
+{"index":{}}
+{"kougi":"第2回","page_id":18,"description":"[3.3クラス変数]:各オブジェクトはインスタンス変数を持ち、そこへ値を格納できる。しかし、場合によっては、各オブジェクトにではなく、そのクラスに属して、一つだけ存在する方が自然な値もある。"}
+{"index":{}}
+{"kougi":"第2回","page_id":18,"description":"そのような値を入れる変数をクラス変数(静的変数、静的フィールド)と呼ぶ。staticという修飾子が付けられる。"}
+{"index":{}}
+{"kougi":"第2回","page_id":18,"description":"クラス変数の宣言の例:P.14のTurtleクラスの変数:withTurtleAll "}
+{"index":{}}
+{"kougi":"第2回","page_id":18,"description":"static boolean withTurtleAll"}
+{"index":{}}
+{"kougi":"第2回","page_id":18,"description":"クラス変数への代入の例:Turtle.withTurtleAll =false;↑左辺は、クラス名+.+クラス変数名の形式"}
+{"index":{}}
+{"kougi":"第2回","page_id":19,"description":"[3.4クラスメソッド]:変数の場合と同様に、インスタンスメソッド(各オブジェクトに属するメソッド)に対するクラスメソッドがある。"}
+{"index":{}}
+{"kougi":"第2回","page_id":19,"description":"クラスメソッドは、オブジェクトに処理を依頼するのではなく、単に処理を実行する場合に使う。staticという修飾子が付けられる。クラスメソッドは、オブジェクトが生成されていなくても呼び出せる。"}
+{"index":{}}
+{"kougi":"第2回","page_id":19,"description":"クラスメソッドの例(P.14):speedAllすべてのTurtleオブジェクトの移動速度を変えるので、クラスメソッドにしてある。[宣言]static void speedAll(int x);[使用(呼び出し)]Turtle.speedAll(1);"}
+{"index":{}}
+{"kougi":"第2回","page_id":19,"description":"↑左辺は、クラス名+.+クラスメソッド名の形式"}
+{"index":{}}
+{"kougi":"第2回","page_id":20,"description":"[3.5標準ライブラリの中のクラス変数/クラスメソッド]:java.awt.Colorクラス　staticインポート機能で、クラス変数やクラスメソッドの使用を簡潔にする。"}
+{"index":{}}
+{"kougi":"第2回","page_id":20,"description":"import static java.awt.Color.*;//このように宣言すると、m1.setColor(red);//Color.redではなく、単にredでよい。"}
+{"index":{}}
+{"kougi":"第2回","page_id":20,"description":"Mathクラス Mathクラスは、java.langというパッケージにある。このパッケージに対してはimportは不要。Mathクラスには、多数のクラス変数やクラスメソッドがある。Math.sqrt(8.9);Math.random();のように呼び出す。"}
+{"index":{}}
+{"kougi":"第2回","page_id":21,"description":"[3.5標準ライブラリの中のクラス変数/クラスメソッド]Systemクラス　Systemクラスのクラス変数outに格納されているオブジェクトには、標準出力用メソッドprint,println等がある。以下のように使う。"}
+{"index":{}}
+{"kougi":"第2回","page_id":21,"description":"System.out.print(''java'');//改行なし　system.out.println(''for Evryone.'');//改行あり　出力結果は、Java for Everyone.となる。"}
+{"index":{}}
+{"kougi":"第2回","page_id":21,"description":"Stringクラス　文字列を表すクラス。上記のJavaなどは、このクラスのオブジェクト。特にnew演算子を使わなくても、文字オブジェクトが生成される。また、演算子+は、文字オブジェクトを連結する。"}
+{"index":{}}
+{"kougi":"第2回","page_id":21,"description":"Stringクラスには、文字列操作に関する様々なメソッドが用意されている。→教科書P.30等を参照。"}
+{"index":{}}
+{"kougi":"第3回","page_id":1,"description":"Javaを学んで今後に生かそう"}
+{"index":{}}
+{"kougi":"第3回","page_id":2,"description":"[第４章処理の流れ]以下の項目は、C言語等と基本的に同じなので、説明は省略し、例題でポイントを確認する。4.1for文による繰り返し4.2繰り返しのネスト4.3whileによる繰り返し4.4論理演算子4.5if文4.6break文とcontinue文4.7switch文"}
+{"index":{}}
+{"kougi":"第3回","page_id":3,"description":"リスト4.1 T41.java:package turtle;public class T41{public static void main(String[] args){TurtleFrame f=new turtleFrame();Turtle m=new Turtle();f.add(m); int i; for(i=0;i<5;i++{m.fd(100);m.rt(72);}}})"}
+{"index":{}}
+{"kougi":"第3回","page_id":3,"description":"これは5角形を描きますが、6角形にするには？さらに、少し、右に傾けてください。"}
+{"index":{}}
+{"kougi":"第3回","page_id":4,"description":"リスト4.2 T42.java:package turtle;public class T42{public static void main(String[] args){TurtleFrame f;f=new TurtleFrame();Turtle m =new Turtle(0,400,0);f.add(m);for(int k-1;k<=20;k++){m.rt(90);m.fd(10);m.lt(90);m.fd(k)};}}}"}
+{"index":{}}
+{"kougi":"第3回","page_id":4,"description":"もっと緩やかな階段にして下さい。"}
+{"index":{}}
+{"kougi":"第3回","page_id":5,"description":"T43.java(繰り返しのネスト，多重ループ):package turtle;public class T43{public static void main(String[]args){TurtleFrame f=new TurtleFrame();Turtle m=newTurtle();f.add(m);for(int i=0;j<8;j++){for(int i=0;i<5;i++){m.fd(50);m.rt(45);}}}"}
+{"index":{}}
+{"kougi":"第3回","page_id":5,"description":"これは、8角形のまわりに5角形を描く。では、5角形の周りに6角形を描こう。"}
+{"index":{}}
+{"kougi":"第3回","page_id":6,"description":"T46.java(nの倍数を利用)：package turtle;public class T46{public static void main(STring[]args){TurtleFrame f=new Turtleframe();Turtle m =new Turtle();f.add(m);for(int i=0; i<18; i++){m.fd(50);if(i%3==0)m.lt(120);else m.rt(30);}}}"}
+{"index":{}}
+{"kougi":"第3回","page_id":6,"description":"これは、右上図のような図形を描きます。それでは、以下を追加して右下図のように、部分的に赤色になることを確認しよう。"}
+{"index":{}}
+{"kougi":"第3回","page_id":6,"description":"iが3の倍数の時：m.setColor(java.awt.Color.red);そうでないとき：m.setColor(java.awt.Color.black);"}
+{"index":{}}
+{"kougi":"第3回","page_id":7,"description":"リスト4.9 Houteisiki41.java(breakとcontinue) package turtle;public class houteisiki41{public static void main(String[] args){int x; for(x=0;x<100;x++){if(x*x-145*x+3616==0)break;}if(x<100)System.out.println(x);else System.out.println(''Not exist'');}}"}
+{"index":{}}
+{"kougi":"第3回","page_id":7,"description":"breakがじっこうされると、このforループを脱出します。それは、この方程式の整数解であるx=32が見つかった時です。では、6行目の前(for文の直後)に、下記の文を置いてみましょう。if(x%2==0)continue;今度は、整数解がみつかるでしょうか？continueは、breakと異なり、ループを脱出はしないで、直ちに、繰り返しの先頭へ移動します。その後、繰り返しは続きます。"}
+{"index":{}}
+{"kougi":"第3回","page_id":8,"description":"[5.1]配列：Javaの配列は、C言語の配列よりも柔軟に使える。Javaの配列はオブジェクトとして生成する。int型の大きさ10の配列は以下のように生成:new int[100]Turttle型のオブジェクト10個を入れる配列は以下のように生成:new Turtle[10] 配列の大きさ、すなわち、[]の中は定数である必要はなく、実行時に値の木アンル変数や式でもよい。"}
+{"index":{}}
+{"kougi":"第3回","page_id":8,"description":"生成した配列は、変数（配列変数）に代入しておく必要がある。int[]n=new int[100];Turtle[]hm=new Turtle[10];変数nの型はint[]であり、変数hmの型はTurtle[]である。上記の代わりに、以下のように書いてもよい。int n=new int[100]; Turtle hm[]=new Turtle[10];"}
+{"index":{}}
+{"kougi":"第3回","page_id":9,"description":"Turtle[]hm =new turtle[10];for(int i=0;i,10;i++){hm[i]=new Turtle();}"}
+{"index":{}}
+{"kougi":"第3回","page_id":9,"description":"左記ステートメントを実行した場合(T51.javaを簡略化した例)のコンピュータ内部の状況"}
+{"index":{}}
+{"kougi":"第3回","page_id":9,"description":"配列というオブジェクトの構造"}
+{"index":{}}
+{"kougi":"第3回","page_id":10,"description":"T51.java(Turtleの配列)：package turtle; public class T51{public static void main(String[]args){TurtleFrame f=new Turtleframe(600,300);Turtle[]hm=new Turtle[10];for(int i0;i<10;i++){hm[i]=new turtle(i*50+25,150,0);f.add(hm[i]);}"}
+{"index":{}}
+{"kougi":"第3回","page_id":10,"description":"for(int i=0;i,10;i++){for(int j=0;j<6;j++){hm[i].fd(10);hm[i].rt(360/6);}}}}"}
+{"index":{}}
+{"kougi":"第3回","page_id":10,"description":"10匹の北向きの亀が配列hmに代入される。各亀オブジェクトhm[i]は、順番に6角形を描く。"}
+{"index":{}}
+{"kougi":"第3回","page_id":11,"description":"配列の大きさ(サイズ)の利用　前スライドのリストの6行目と10行目：for(int i=0;i,10;i++){"}
+{"index":{}}
+{"kougi":"第3回","page_id":11,"description":"この１０は、配列hmの大きさ(長さ)であった。実は、配列hmの大きさは、以下で得られる。hm.lengthだから、これを使った方がよい。"}
+{"index":{}}
+{"kougi":"第3回","page_id":11,"description":"前スライドのリストの6行目と10行目：for(int i=0;i<hm.length;i++){"}
+{"index":{}}
+{"kougi":"第3回","page_id":11,"description":"T51.javaを、上記のように書き換え、タートルの個数を10匹ではなく、6匹に変更して実行しよう。"}
+{"index":{}}
+{"kougi":"第3回","page_id":12,"description":"TurtleFrameのウインドウのサイズ：TurtleFrameオブジェクトfのウインドウサイズは以下のようにして得られますので、利用してみましょう。横方向サイズ:f.getWidth(),縦方向サイズ:f.getHeight()"}
+{"index":{}}
+{"kougi":"第3回","page_id":12,"description":"Turtleオブジェクトを横方向に等間隔に並べる例"}
+{"index":{}}
+{"kougi":"第3回","page_id":13,"description":"package turtle;public class T51b {public static void main(String[] args){TurtleFrame f =new TurtleFrame(400,400);double x1=100.5,y1=100.4;f.addMesh();Turtle t1 =new Turtle(x1,y1,0);//コンパイルエラー}}"}
+{"index":{}}
+{"kougi":"第3回","page_id":13,"description":"package turtle; public class T51b{publiv static void main(String[] args){Turtleframe f=new TurtleFrame(400,400);double x1=100.5d,y1-100.4d;float x2=300.5f,y2=300.4f;f.Mesh();Turtle t1 =new Turtle((int)x1,(int)y1,0);"}
+{"index":{}}
+{"kougi":"第3回","page_id":13,"description":"Turtle t2 =new Turtle(Math.round(x2),Math.round(y2),0);f.add(t1);f.add(t2);System.out.println(''t1の座標：''+t1.getY());System.out.println(''t2の座標：''+t2.getY());"}
+{"index":{}}
+{"kougi":"第3回","page_id":13,"description":"座標にdouble型、float型の変数を必要とする場合には、int型にキャストするか、数学関数で丸める。"}
+{"index":{}}
+{"kougi":"第4回","page_id":2,"description":"[5.2初期値をもった配列]：ここまでは、配列の生成にnew演算子を使用した。次のように配列の中身(配列の初期値)を与えることでも生成できる。配列の長さ(サイズ)は、与えた要素の個数で決める。"}
+{"index":{}}
+{"kougi":"第4回","page_id":2,"description":"mon[1]が31、mon[2]が28というように、各月の日数を入れる配列int[]mon={0,31,28,31,30,31,30,31,31,30,31,30,31}"}
+{"index":{}}
+{"kougi":"第4回","page_id":2,"description":"上と同じだが、配列宣言部分以外でのint型配列の生成も行えるnew int [] {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}"}
+{"index":{}}
+{"kougi":"第4回","page_id":2,"description":"文字列(String型オブジェクト)を要素とする配列String[]week={日曜,月曜,火曜,水曜,木曜,金曜,土曜}"}
+{"index":{}}
+{"kougi":"第4回","page_id":2,"description":"色(Color型オブジェクト)を要素とする配列Color[]c={Color.orange,Color.red,Color.blue}"}
+{"index":{}}
+{"kougi":"第4回","page_id":3,"description":"練習問題5.8 P55.Java package turtle;import java.awt.*;public class P55{public static void main(String[] args){int[]size={20,40,20,60};int[]n={7,5,3,4,6};Color[]c={Color.orange,Color.red,Color.blue};Turtleframe f=new TurtleFrame(600,300);"}
+{"index":{}}
+{"kougi":"第4回","page_id":3,"description":"Turtle[]hm =new Turtle[10];for(int i=0;i<hm.klength;i++){hm[i]=new Turtle(i*50+25,150,0);hm[i].setColor(c[i%c.length]);hm[i].rt(360/nn);}}}}"}
+{"index":{}}
+{"kougi":"第4回","page_id":4,"description":"[5.4 配列の配列]例えば、3×4＝12個のタートルを入れる２次元配列は、new Turtle[3][4]で生成される。この配列の型は、Turtle [][]である。 したがって、変数tmへこの配列を格納するには次のようにする。Turtle [][] tm = new Turtle[3][4];この時点では、配列要素tm[i][j]にはnullが入っている。"}
+{"index":{}}
+{"kougi":"第4回","page_id":4,"description":"この2次元配列に12個のTurtleオブジェクトを代入するには、for (int n = 0; n<3; n++)for (int m = 0; m<4; m++)tm[n][m] = new Turtle(m*50, n*50, 0); 2次元配列の場合も、以下のように、配列要素を初期設定できます。3×4＝12個のint型の値を入れる配列aの初期設定int [][] a ={ {2,5,4,2}, {2,2,4,1}, {1,3,4,2} }"}
+{"index":{}}
+{"kougi":"第4回","page_id":5,"description":"Turtle [][] tm = new Turtle[3][4];for (int n = 0; n<3; n++)for (int m = 0; m<4; m++)tm[n][m] = new Turtle(m*50, n*50, 0);"}
+{"index":{}}
+{"kougi":"第4回","page_id":6,"description":"配列の生成Turtle [][] tm = new Turtle[3][4];Turtleオブジェクトを配列へ格納for (int n = 0; n<3; n++)for (int m = 0; m<4; m++)tm[n][m] = new Turtle(m*50, n*50, 0);"}
+{"index":{}}
+{"kougi":"第4回","page_id":7,"description":"T52.java(2次元配列、多重ループの利用)"}
+{"index":{}}
+{"kougi":"第4回","page_id":8,"description":"T53.java(2次元)配列は、長方形でなくてもよい！"}
+{"index":{}}
+{"kougi":"第4回","page_id":9,"description":"2次元配列で、離れた折れ線を描く(多重ループ)"}
+{"index":{}}
+{"kougi":"第4回","page_id":10,"description":"前スライドと同じ処理をループ無しでやってみよう。"}
+{"index":{}}
+{"kougi":"第4回","page_id":11,"description":"T51.java(すでに検討済み)：package turtle;public class T51{public static void main(String[] args){TurtleFrame f=new Turtleframe(600,300);Turtle[]hm=new Turtle[10];for(int i=0;i<10;i++){hm[i]=new Turtle(i*50+25,150,0);f.add(hm[i]);}"}
+{"index":{}}
+{"kougi":"第4回","page_id":11,"description":"for(int i=0;i<10;i++){for(int j=0;j<6;j++){hm[i].fd(10);hm[i].rt(360/6);}}}}"}
+{"index":{}}
+{"kougi":"第4回","page_id":11,"description":"拡張for文で以下のように書き換えてみよう！for(Turtle m:hm){for(int j=0;j<6;j++){m.fd(10);m.rt(360/6);}}"}
+{"index":{}}
+{"kougi":"第4回","page_id":12,"description":"[5.6]Args51.java mainメソッドの引数"}
+{"index":{}}
+{"kougi":"第4回","page_id":12,"description":"mainは必ず、String型の配列を仮引数として持つ。argsがそれである。配列argsの大きさは、実行時引数の個数で決まる。何も与えなかった場合は、大きさはゼロ。"}
+{"index":{}}
+{"kougi":"第4回","page_id":12,"description":"args[0]には、第１番目の引数が渡される。この例では、Apple "}
+{"index":{}}
+{"kougi":"第4回","page_id":12,"description":"args[1]にはGrape、args[2]には10が渡される。渡される引数は文字列(String型)となる。10は数値の10ではなく文字列なので、必要に応じて、数値に変換して使う。"}
+{"index":{}}
+{"kougi":"第4回","page_id":13,"description":"[6.3] プリミティブ型の値のキャスト（型変換）：Javaのプリミティブ型は、C言語などと同様に、以下のものがある。表せる情報の大きさや精密さに応じた大小関係がある：byte < short < int < long < float < double　小さい型の値を、より大きな型の変数に代入する場合は問題ない　int i = 10; float f = i; （fは10.0になるだろう。）"}
+{"index":{}}
+{"kougi":"第4回","page_id":13,"description":"しかし、その逆に、大きな型の値を、より小さな型の変数へは直接代入できない。情報が欠落する恐れがあるから。 double g = 10.979d; int n = g;（これはコンパイルエラー）でも、そういう風に使いたい場合もある。その時は、以下のように強制的に型変換して（すなわち、キャストして）使うことになる。double g = 10.979d; int n = (int)g;"}
+{"index":{}}
+{"kougi":"第4回","page_id":13,"description":"（int）は、int型へのキャストである。この場合、nは10となる。キャストで思わぬ結果を招く場合もあるので注意。→教科書pp.55-56"}
+{"index":{}}
+{"kougi":"第4回","page_id":14,"description":"[6.7] ラッパークラスプリミティブ型の値は、オブジェクトではない。しかし、それをオブジェクトとして扱いたい場合がある。それを可能にするのが、ラッパークラスで例えば、int型をオブジェクトとして扱うためにIntegerというラッパークラスがある。他のプリミティブ型にも、それに対すすラッパークラスがある。"}
+{"index":{}}
+{"kougi":"第4回","page_id":14,"description":"Integerクラスには、int型の値をオブジェクトにしたり、文字列をint型に変換したりする、様々なメソッドが備わっている。すでに述べたmainメソッドの引数として受け取り、args[i]はString型であった。これをint型の数値に変換するには、IntegerクラスのparseIntというメソッドを使う。（→教科書pp.51-52参照）Integer.parseInt(args[i])"}
+{"index":{}}
+{"kougi":"第5回","page_id":2,"description":"[今回の講義範囲]第7章：クラスの作成(pp.60-76)ただし，以下の項目は、時間の都合上省略します。(後日、必要になった際にあらためて説明します。)p.72の下部：staticブロック	p.74：内部クラス	 p.75の上部：匿名クラス"}
+{"index":{}}
+{"kougi":"第5回","page_id":3,"description":"7クラスの作成[7.1]メソッド これまでに、クラスとオブジェクト（インスタンス）の基礎を学んだ。ここでは、自分で新しいクラスを作成することを学ぶ。[例]これまでのTurtleクラスを拡張（=継承）してHTurtleクラスを作る。高機能化するため。"}
+{"index":{}}
+{"kougi":"第5回","page_id":3,"description":"これを、HTurtle extends Turtleと表す。extendsは”継承”を意味する。HTurtleでは、Turtleの持つメソッド、フィールドはそのまま使える。HTurtleには、あらたに2つのメソッドを追加する。追加するのは、polygon(多角形を描く)とhouse（家を描く）。それにより、HTurtleは、元のTurtleも高機能なクラスとなる。TutrtleクラスをHTurtleクラスの親クラス（スーパークラス）と呼ぶ。HTurtleクラスをTurtleクラスの子クラス（サブクラス）と呼ぶ。"}
+{"index":{}}
+{"kougi":"第5回","page_id":4,"description":"[リスト7.2 HTurtle.java]（前スライドの説明をJavaで書くと）:Turtleクラスを拡張、多角形描画メソッドを追加、家を描くメソッドを追加"}
+{"index":{}}
+{"kougi":"第5回","page_id":4,"description":"package turtle; public class Hturtle extends Turtle{synchronized public void polygon(int n, int s){int a=360/n;for(int j=0;j<n;j++){fd(s);rt(a);}}public void house(int s){polygon(4,s);fd(s);rt(30);polygon(3,s);lt(30);bk(s);}}"}
+{"index":{}}
+{"kougi":"第5回","page_id":5,"description":"[リスト7.1 T71.java](拡張されたHTurtleを使う)：package turtle; public class T71 {public static void main(String[] args){TurtleFrame f = new TurtleFrame();HTurtle m = new HTurtle();int s = 50;f.add(m); m.house(s); m.up();m.lt(90); m.fd(50); m.rt(72); m.down();m.polygon(5, s / 2); m.up(); m.moveTo(100,100,0); m.down();m.polygon(10, s / 5);}}"}
+{"index":{}}
+{"kougi":"第5回","page_id":5,"description":"HTurtleのオブジェクトmを生成　追加されたメソッドの呼び出し　親クラスにあったメソッドの呼び出し　HTurtleクラス(前スライド)"}
+{"index":{}}
+{"kougi":"第5回","page_id":6,"description":"[リスト7.2 HTurtle.java](聞き慣れないthisというオブジェクト)：package turtle;public class HTurtle extends Turtle {synchronized public void polygon(int n, int s){  int a = 360/n; for(int j = 0; j < n; j++){ fd(s);rt(a);}}synchronized public void house(int s){ polygon(4,s);fd(s); rt(30);polygon(3,s);lt(30); bk(s);}"}
+{"index":{}}
+{"kougi":"第5回","page_id":6,"description":"これまでは、例えばTurtleオブジェクトmのメソッドfdを呼び出すには、m.fd(s)のようにしていた。しかし、ここでは、単にfd(s)となっている。どうなのか？他のメソッドでも同様だが…実は、this.fd(s)のthisが省略されていたのである。this（=このオブジェクト）は、polygonメソッドを呼び出しているHTurtleオブジェクト自身を意味する。→実際にthisを付加して実行してみよう！"}
+{"index":{}}
+{"kougi":"第5回","page_id":7,"description":"[リスト7.1 T71.java](親クラスと子クラスの関係について)：package turtle;public class T71 {public static void main(String[] args){TurtleFrame f = new TurtleFrame();HTurtle m = new HTurtle();int s = 50;f.add(m);   m.house(s); m.up(); m.lt(90); m.fd(50); m.rt(72); m.down();m.polygon(5, s / 2); m.up(); m.moveTo(100,100,0); m.down();m.polygon(10, s / 5);}}"}
+{"index":{}}
+{"kougi":"第5回","page_id":7,"description":"このステートメントのmに注目！下記参照：7行目：TurtleFrameオブジェクトfに対する、f.add(m)のmに着目。p.14の仕様では、mはTurtle型であることになっている。しかし、上の例のように、mはHTurtle型でもよい！すなわち、HTurtleはTurtleの一種なので、Turtleオブジェクトが使われる所でHTurtleオブジェクトを使ってよい。"}
+{"index":{}}
+{"kougi":"第5回","page_id":8,"description":"[リスト7.1 T71.java](親クラスと子クラスの関係について)続き：もしも、5行目のHturtle(両方とも)を、Turtleに鉛鉱すると...例えば、8行円のm.house(s)はコンパイルエラーになります。これはなぜでしょうか？"}
+{"index":{}}
+{"kougi":"第5回","page_id":9,"description":"[7.1.3 メソッドの多重定義(オーバーロード)](第2回講義の復讐！)：一つのクラスに同盟で引数の型や個数が異なる複数のメソッドを定義すること。T22.javaでつかったmoveToメソッドを再確認せよ！"}
+{"index":{}}
+{"kougi":"第5回","page_id":9,"description":"[7.1.4 値を返すメソッド(C言語等と同様だが復習)]：public int polygon(int n, int s){int a = 360/n; for(int j = 0; j < n; j++){fd(s); rt(a); }return n*s;}"}
+{"index":{}}
+{"kougi":"第5回","page_id":9,"description":"Hturtleの、polygonが、多角形を描画するのに要した距離を返すには...."}
+{"index":{}}
+{"kougi":"第5回","page_id":10 ,"description":"[7.3 アクセス修飾子]：まず、第2回講義で述べた以下の項目について、各自復習しよう。［復習］インスタンス変数→教科書2.7など［復習］パッケージ→教科書3.1など。システムのクラス群は、パッケージという単位で区分けされている。ユーザプログラムでもパッケージを使う。ここでは、turtleというパッケージのもとでクラスを作成している。（同一クラス名があっても、それらが別のパッケージにあれば混乱無く使えるのである。）。"}
+{"index":{}}
+{"kougi":"第5回","page_id":11,"description":"[7.3 アクセス修飾子]続き：クラス、メソッド、フィールドの宣言の先頭に、アクセス制限に関する修飾子であるpublic, protected, privateを付ける。（下記例外もある。）public：どこからでも（別のパッケージからでも）アクセス可能。protected：同じパッケージに属するクラス、およびその子クラスからアクセス可能。private：そのクラスの中からだけアクセス可能。同一パッケージ内の他のクラスからもアクセスできない。（保守性を高めるためのカプセル化）"}
+{"index":{}}
+{"kougi":"第5回","page_id":11,"description":"メソッドとフィールドには、上記3種類のアクセス修飾子を付加できる。デフォルトでは（修飾子を明示しない場合は）、protectedが働く。ただし、クラスとインターフェース（後日）には、publicだけを付加できる。publicの付いたクラスAは、そのクラスと同名のファイル（A.java）の中に書かなくていけない。また、一つのファイルには、publicなクラスは一つだけしか許されない。"}
+{"index":{}}
+{"kougi":"第5回","page_id":12,"description":"メソッドstep()の実行後も、変数jの値はそのまま残る。それが、インスタンス変数。インスタンス変数jをprivateにしたのはなぜか？stepperクラス内でのみ使うので、公開しない方がよいから。ここに、m1.j=0;を追加してみよう。どうなりますか？"}
+{"index":{}}
+{"kougi":"第5回","page_id":13,"description":"[7.4コンストラクタ](まず、第2回講義の復讐)：クラスからオブジェクト(インスタンス)を生成するためのもの。クラス名と同一名で、引数が異なるものも使われる。new演算子の後ろに続けて書かれる。"}
+{"index":{}}
+{"kougi":"第5回","page_id":13,"description":"TurtleFrame f = new TurtleFrame(700,500);TurtleFrame f1 = new TurtleFrame();Turtle m = new Turtle(x, y, 180);Turtle m1 = new Turtle();引数2つのコンストラクタ引数　3つのコンストラクタ　デフォルトコンストラクタ→P.14 に、両クラスのコンストラクタの仕様があるので、再確認！"}
+{"index":{}}
+{"kougi":"第5回","page_id":14,"description":"前出のstepperクラスにコンストラクタを追加：インスタンス変数n.sizeをprivateに変更する。コンストラクタでこれらの値と設定するようにする。そのため以下の2つのコンストラクタを新設する。"}
+{"index":{}}
+{"kougi":"第5回","page_id":14,"description":"CStepperクラス(前出のStepperを作り直す)Turtleクラスを拡張している。コンストラクタ：Cstepper(int n,int size,int x,int y, int angle)n角形を1篇の長さsizeで描くCStepperを、(x,y)の座標にangleの角度で作成。CStepper(int n ,int size)n角形を1辺の長さsizeで描くCStepperを（200,200）の座標に0度の角度で作成。メソッド：void step() n角形の1辺だけを描く。すでにn角形を描き終わっていたら何もしない。"}
+{"index":{}}
+{"kougi":"第5回","page_id":15,"description":"CStepperクラスのコンストラクタ：インスタンス変数n.sizeをprivateに変更する。package turtle;import java.awt.Color;public class CStepper extends Turtle{private int n;private int size;private int j = 0;public CStepper(int n, int size, int x, int y, int angle){super(x, y, angle);this.n = n;this.size = size;}public CStepper(int n, int size){ this(n, size, 200, 200, 0); }"}
+{"index":{}}
+{"kougi":"第5回","page_id":15,"description":"8行目：super(x, y, angle)は、親クラスのTurtleのコンストラクタの呼び出し。子クラスのCStepperでも、親クラスで行われた初期設定は必要である。9行目：this.n = n;thisは、このコンストラクタで作られるオブジェクト自身であるので、this.nはインスタンス変数nを意味する。右辺のnは、コンストラクタの仮引数nを意味する。（仮引数の方が優先度が高いので、インスタンス変数を参照するには、this.nとするのである。）"}
+{"index":{}}
+{"kougi":"第5回","page_id":16,"description":"クラスメソッド（復習：第2回講義スライドより）[3.4 クラスメソッド]変数の場合と同様に、インスタンスメソッド（各オブジェクトに属するメソッド）に対するクラスメソッドがある。クラスメソッドは、オブジェクトに処理を依頼するのではなく、単に処理を実行する場合に使う。staticという修飾子が付けられる。クラスメソッドは、オブジェクトが生成されていなくても呼び出せる。クラスメソッドの例（P.14）：speedAll全てのTurtleオブジェクトの移動速度を変えるので、クラスメソッドにしてある。[宣言]static void speedAll(int x);[使用（呼び出し）]Turtle.speedAll(1);↑クラス名＋ ”.” + クラスメソッド名の形式"}
+{"index":{}}
+{"kougi":"第5回","page_id":17,"description":"[5.6] Args51.java mainメソッド（復習：第4回講義スライド）：mainは必ず、String型の配列を仮引数として持つ。argsがそれである。配列argsの大きさは、実行時引数の個数で決まる。何も与えなかった場合は、大きさはゼロ。args[0]には、第1番目の引数が渡される。この例では、”Apple”args[1]には”Grape”、args[2]には、”10”が渡される。渡される引数は文字列（String型）となる。”10”は数値の10ではなく文字列なので、必要に応じて、数値に変換して使う。"}
+{"index":{}}
+{"kougi":"第5回","page_id":18,"description":"再度 mainメソッド（CStepper.javaの場合） mainメソッドは、必ずpublicでstatic（そうでないと、Javaシステムから起動できない。）mainを含むクラスはpublicである必要はないが、通常publicとする。これまでのように、mainだけを含むクラスもある。しかし、左図のように、複数のメソッド、コンストラクタを含むクラスに、mainをクラスメソッドとして含めてもよい。"}
+{"index":{}}
+{"kougi":"第5回","page_id":19,"description":"再度 mainメソッド（CStepper.javaの場合）左図のように、複数のメソッド、コンストラクタを含むクラスに、mainをクラスメソッドとして含まれる場合を実行してみよう。"}
+{"index":{}}
+{"kougi":"第6回","page_id":2,"description":"[今回の講義範囲]第８章： メソッドの再定義と動的結合（pp.77-88）（今回は、第８章の前半です。後半は次回講義します。）今回は、8.1.1 型検査〜8.3 final, abstractなど次回は、8.4 インタフェース〜9.3パッケージ、および、前回の復習本テキストは、第１章〜第17章の構成。このうち、最も重要な基本（肝：きも）は、第７章第８章！残りは、準備、拡張、応用とも言えるのである。"}
+{"index":{}}
+{"kougi":"第6回","page_id":3,"description":"[型は何のためにあるのか？]  (1) int n; // 変数nはint型(2) TurtleFrame f; //変数fはTurtleFrame型(3) Turtle t ; //変数tはTurtle型  例えば、以下の記述はどうだろうか？f.fd(10);//これは、実行前に、コンパイルエラーとしてはじかれるfはTurtleFrame型、すなわち、fにはTurtleFrameオブジェクトが格納される。しかし、TurtleFrameクラスには、fdというメソッドは存在しない。この例からも分かるように、コンパイル時に、型の検査をすることで、上記のような｢メソッドが見つからない｣という異常（エラー）が実行時に起こらないようしている。型を考慮しながらプログラム作成することは、頭の中が整理され、見通しの良いプログラミングに繋がる。"}
+{"index":{}}
+{"kougi":"第6回","page_id":4,"description":"[メソッドのシグネチャ]メソッド名、仮引数の個数、仮引数の型をまとめて、シグネチャという。P.14のTurtleFrameのメッソドaddのシグネチャ：void add(Turtle t)これを呼び出す際に、引数tには、必ずしもTurtle型でないオブジェクトを与えてもよい。すなわち、Turtle型よりも具体的な（サブクラスの型）でもよい。したがって、リスト7.1では、tとしてHTurtleクラスのオブジェクトを与えている。HTurtleは、Turtleのサブクラス。"}
+{"index":{}}
+{"kougi":"第6回","page_id":5,"description":"[クラスと型の関係]クラスA継承extendsクラスB親クラス(スーパークラス)子クラス(サブクラス)クラスAのオブジェクト出現場所に、クラスBのオブジェクトも出現可能。Bオブジェクトは、Aオブジェクトの性質を備えているから。その逆は不可とされている。クラス型Aは、クラスAとそのサブクラスのオブジェクト全体の集合を意味する。"}
+{"index":{}}
+{"kougi":"第6回","page_id":6,"description":"[T81.javaを実行してみよう]：実行時パラメータ（引数）を与えた場合と与えない場合で、mの内容は変わるが結果は同じ。"}
+{"index":{}}
+{"kougi":"第6回","page_id":7,"description":"package turtle;public class T81{public static void main(String[] args){TurtleFrame f = new TurtleFrame();Turtle m;  if(args.length > 0){ m = new HTurtle();   }else{m = new Turtle();}f.add(m);m.fd(100); m.rt(36);     turtleStar(m); }static void turtleStar(Turtle t){ for(int i = 0; i < 5; i++){t.fd(100); t.rt(144);}}}"}
+{"index":{}}
+{"kougi":"第6回","page_id":7,"description":"mはTurtle型だが、サブクラスであるHTurtleのオブジェクトが代入されてもよい。tはTurtle型だがサブクラスであるHTurtleオブジェクトが渡されてもよい。"}
+{"index":{}}
+{"kougi":"第6回","page_id":8,"description":"[クラス型のキャスト]プリミティブ型のキャストについてはすでに述べた。→第４回講義資料 p.13参照クラス型についても同様のキャストが使われる。［ 例］ mにHTurtle型のオブジェクトが入っている場合に、(1) Turtle m; //ｍが親クラス型に宣言されていても(2) ((HTurtle)m).polygon(5, 20); //これが可能。(3) (Hturtle)mで、mをHTurtle型にキャストしている。すなわち、Turtle mと宣言されていても、mに実際にはHTurtleオブジェクトが入っていれば、キャストして、本来のHTurtle型として扱える。キャストしないと、m.polygon(5, 20)はコンパイルエラー。"}
+{"index":{}}
+{"kougi":"第6回","page_id":9,"description":"むやみにはできないクラス型のキャスト！(1)例えば、ｍにTurtleオブジェクトが代入されている場合、((HTurtle)m).polygon(4, 50);は、実行時エラーとなる。(2)したがって、あるクラス型へキャストする場合、そのオブジェクトが実際にそのクラス型であるかの検査が必要になる。次のようにする：if ( m instanceof HTurtle){((HTurtle)m).polygon(5, 20);}// instanceofは、オブジェクトが属する型を検査する"}
+{"index":{}}
+{"kougi":"第6回","page_id":10,"description":"この instanceof が実際に使われている箇所を見てみよう。→練習問題8.1（P81.java）を実行！やってみよう［ケース１］実行時パラメータなし両ケースとも、Turtle m; と宣言されたmで線を描くが…mをHTurtle型にキャストできるので、メソッドpolygonを使える。［ケース２］実行時パラメータあり"}
+{"index":{}}
+{"kougi":"第6回","page_id":11,"description":"[メソッドの再定義（オーバーライド）]親クラスにあるメソッドと同名（シグネチャと返値も同じ）のメッソドを子クラスで（変更して）再定義できる。そうしても、親クラスの方のメソッドは存在はしている。子クラスの中では、再定義した方が優先されるのである。［例］リスト8.2 Tensen.java1) HTurtleを親クラスとして、新たにTnesenクラスを定義する。（HTurtleは、Turtleを親クラスとしている）1) このTensenの中で、点線で軌跡を描くように、メソッドfdの仕様を変更したいので、それを再定義する。2) したがって、Tensenの中で、fd(100); とすると、再定義されたfdを呼び出す。親クラスにあったfdを呼び出すには、super.fd(100);のようにする。"}
+{"index":{}}
+{"kougi":"第6回","page_id":12,"description":"[例]リスト8.2Tensen.java：package turtle;public class Tensen extends HTurtle{int psize = 10;public void fd(int s){int k, len;for(k = 0, len = 0 ; len + psize <= s; k++, len+= psize){if(k % 2 == 0) down(); else  up();super.fd(psize);}down();super.fd(s - len);}public static void main(String[] args){TurtleFrame f = new TurtleFrame();Tensen m = new Tensen();f.add(m);m.fd(100);m.rt(90);m.up(); m.fd(100); m.down();m.lt(90);m.polygon(5, 50);}}"}
+{"index":{}}
+{"kougi":"第6回","page_id":12,"description":"点線を描くようにfdを再定義、点線の実線部には、親のfdを使うので、superを付ける。super無しだと、fdは自分自身を呼び出してしまう!"}
+{"index":{}}
+{"kougi":"第6回","page_id":13,"description":"[例]リスト8.2Tensen.java(続き1):親クラスのfdの中では親クラスfdの中では、ペンの上げ下げの情報を使っていた。しかし、再定義したfdはそれを使っていない！再定義するfdでも、ペンの上げ下げをするようにしたもの→Tensen1.java"}
+{"index":{}}
+{"kougi":"第6回","page_id":14,"description":"動的結合と呼ばれる仕組みが使われている。（ポリモルフィズムと呼ばれる概念に基づく）以下のように書き換えよう：HTurtle m = new Tensen();結果は変わらない。つまり、呼び出されるfdは、宣言されたmの型ではなく、mにどのクラスのオブジェクトが代入されているかで決まる。それは実行時に決まる！（動的）"}
+{"index":{}}
+{"kougi":"第6回","page_id":15,"description":"修飾子（final, abstract など）・final：メソッドに付加した場合：そのメソッドは再定義禁止（そのまま使え！ということ） Javaシステムのあるクラスのメソッドはそうなっている。変数に付加した場合：定数として扱われる。・abstract：あるクラスで、あるメソッドを他のメソッドの定義に使うが、そこでは内容を決めず、サブクラスを作って、そこで、そのメソッドを再定義してもらう場合がある。"}
+{"index":{}}
+{"kougi":"第6回","page_id":15,"description":" サブクラスで実装されるべきメソッドは、抽象メソッドと呼ばれ、abstract修飾子が付けられる。抽象メソッドを持つクラスは、抽象クラスと呼ばれ、abstractが付けられる。抽象クラスからは（不完全なので）、オブジェクトは生成できない。抽象クラスからサブクラスを作成し、そこで、抽象メソッドを実装（再定義）して、そのサブクラスのオブジェクトを生成する。"}
+{"index":{}}
+{"kougi":"第6回","page_id":16,"description":"抽象クラスの例(リスト8.3,リスト8.4):抽象クラスを継承したサブクラス、抽象クラス"}
+
+{"index":{}}
+{"kougi":"第7回","page_id":1,"description":"[今回、第7回の講義範囲] 第8章：メソッドの再定義と動的結合（pp.77-100)（今回は、第8章の後半です。最初に前回の復習を行います。） 前回の復習（第6回講義スライド参照） 続いて、8.4 インタフェース〜9.3パッケージ・本テキストは、第1章〜第17章の構成。 このうち、最も重要な基本（肝：きも）は、第7章 & 第8章！ 残りは、準備、拡張、応用とも言えḂのである。"}
+{"index":{}}
+{"kougi":"第7回","page_id":2,"description":"[インターフェース](1)クラスAついて、型Aとは、Aとそのサブクラスのオブジェクト全体を意味する。（復習）(2)インターフェースBとは、クラスではないが、メソッドの名前の集まりとして定義される型Bのことである。(3)クラスAが、インタフェース型Bに属することを、そのインタフェースを実装する（implements）という。(4)クラスAが親クラスXを継承すḂ（extends）場合と似ている。5)実際、クラスAは、Xをextendsして、さらにBをimplementsできる。"}
+{"index":{}}
+{"kougi":"第7回","page_id":4,"description":"メソッドdrawの中身は、実装するクラスでそれぞれ定義される。"}
+{"index":{}}
+{"kougi":"第7回","page_id":5,"description":"インターフェースと実装クラスを使った例（リスト8.7 T82.java）(a)5行目の変数hmは、インターフェースDrawable型の配列である！(b)14行目で呼び出されているメソッドdrawの内容は、hm[n]がどのクラス（インターフェースを実装した）のオブジェクトであるかで決まる！(c) 6行目、7行目で、キャスト(Turtle）をやめるとどうなる？"}
+{"index":{}}
+{"kougi":"第7回","page_id":6,"description":"8.5フィールドの隠蔽：ここは少し難解かもしれない。飛ばしてもいいが、一応説明します。Rabbitオブジェクトrは、r.fd(…)のように、fdを呼び出せる。このfdは、TurttleクラスのturtleCを参照する。RabbitクラスのturtleCではない！これが、フィールドの静的結合である"}
+{"index":{}}
+{"kougi":"第7回","page_id":6,"description":"親クラスのインスタンス変数turtleCと同名の変数を子クラスでも宣言できる。Rabbitオブジェクトは、2つのturtleCを持つことになる。単に、turtleCを参照するとthis.turtleCの意味（すなわち、RabbitクラスのturtleCを指す。）親クラスのturtleCは隠蔽される。しかし、それを参照したいのであれば、super.turtleCとすればよい。"}
+{"index":{}}
+{"kougi":"第7回","page_id":7,"description":"練習問題8.7　R81.javaを実行してみよう。 やってみよう Turtleクラスで定義さḃていた亀を兎にする。（前スライドの、フィールドの隠蔽に関係がある。）"}
+{"index":{}}
+{"kougi":"第7回","page_id":8,"description":"9.1例外処理：プログラム実行中に、想定外の事態が起こり、異常終了することがある。それを避けるための処理"}
+{"index":{}}
+{"kougi":"第7回","page_id":8,"description":"リスト9.1 Mikuji91.java　：実行時のパラメータが７ならば、あたりそれ以外の数字ならば、はずれやってみよう 実行時パラメータを何も値無かった場合は、異常終了する。java.lang.ArrayIndexOutOfBoundsException実行時パラメータとして、記号”#”などを与えた場合も、異常終了する。java.lang.NumberFormatException"}
+{"index":{}}
+{"kougi":"第7回","page_id":9,"description":"リスト9.2 mikuji92.java  ：以下のケースの対応例： 実行時パラメータとして、記号”#”などを与えた場合、異常終了。java.lang.NumberFormatException　try部に、例外発生の可能性のあるコードを書く。catch部で、補足する例外を指定し、それが発生した場合の処理を書く。やってみよう（注）try-catchに関しては、第15章「データ入出力」で再度取り上げる"}
+{"index":{}}
+{"kougi":"第7回","page_id":10,"description":"ガーベッジコレクション：new演算子でクラスかḀオブジェクトを生成する。そのままにしておくと、不要のオブジェクトがたくさん貯まってしまう。不要オブジェクトを、自動的に判別して削除する（占有していたメモリを解放すḂ）仕組みがガーベッジコレクションである。■パッケージ：多数のクラスを管理するための、ファイルシステムでのディレクトリに相当する機能。大規模システムを複数人で共同開発する場合、各々の独立性を保つための仕組みでもある。Eclipseでも、クラス群を機能別に分類して扱うために、このパッケージを利用している。クラスやインターフェースをパッケージに属させるには、先頭で以下のように書く：package ＜パッケージ名＞;"}
+{"index":{}}
+
+
+{"kougi":"第8回","page_id":1,"description":"復習スライド"}
+{"index":{}}
+
+{"kougi":"第9回","page_id":2,"description":"[今回：第9回の講義範囲]10章：マルチスレッドと並列処理（pp.101-110）スレッドとは、プログラムの実行の流ḃのこと。PCの中のプログラムでは、多数のスレッドが同時に動いている場合が多い。すなわち、マルチスレッドで動いていることが多い。なぜ、マルチスレッドが必要なのか？例えば、Webサーバを考えて見る。シングルスレッドだと、多数のクライアントが接続してきても、一人の処理が完了するまで、次の人の要求は受け付けられないだろう。マルチスレッドにすḃば、次スライドのようにその不都合は解消できるだろう。システムで用意さḃたプログラムでなくても、ユーザは自分のプログラムをマルチスレッドで動かすことができる。Javaではその機能を提供している。マルチスレッドは、多くの課題を含む奥の深い技術なので、ここではその基礎（初歩）を学ぶ。"}
+{"index":{}}
+{"kougi":"第9回","page_id":3,"description":"もしも、Webサーバがシングルスレッド↓（mainスレッドのみで動くとすると、上図のようになるだろう。"}
+{"index":{}}
+{"kougi":"第9回","page_id":4,"description":"現実のWebサーバは、上図の᷿うにマルチスレッド（この例では、mainスレッド以外に、3つの新たなスレッド）で動いている。"}
+{"index":{}}
+{"kougi":"第9回","page_id":5,"description":"1) これまでの例題や練習問題はシングルスレッドだった。mainメソッドか開始する一つのスレッド（mainスレッド）のみ。）2) Javaでは、スレッドを複数生成し、そḃḀを同時に動かせる。（例えば、複数のタートルを同時に動かせる。"}
+{"index":{}}
+{"kougi":"第9回","page_id":6,"description":"別スレッドの生成はこうする：1) スレッドもオブジェクトである、Threadクラスから、以下のように生成する：new Thread(obj)  4) この新しいスレッドは、オブジェクトobjで定義されるrun()というメソッドから実行を開始する5) そのため、このobjのクラスは、Runnableというインタフェースを実装し（implements）、その中のrun()メソッドの処理内容を定義している。それが、新たなスレッドで実行される。・6) 別の言い方として、「オブジェクトobjの上をスレッドが走る」という場合もある次のスライドのソースリストを確認してみよう"}
+{"index":{}}
+{"kougi":"第9回","page_id":7,"description":"前のスライドのような実行結果になることを確認してみよう。何度か実行してみよう！その都度、実行結果（出力順序）は異なるだろう。"}
+{"index":{}}
+{"kougi":"第9回","page_id":8,"description":"Hturtleに、以下のコンストラクタが追加されている必要があります。public HTurtle(int x, int y, int angle){super(x, y, angle);}public HTurtle(){super();}"}
+{"index":{}}
+{"kougi":"第9回","page_id":9,"description":"新規スレッドでmpolygonオブジェクトの実行を行うために必要！、起動されたスレッドで多角形を描く。スレッドt,t1にそれぞれ10角形、5角形を描くオブジェクトを割り当てる、スレッドを起動"}
+{"index":{}}
+{"kougi":"第9回","page_id":10,"description":"リスト10.2：スレッドは休止（sleep）できる。Threadクラスのクラスメソッドsleepによって、それを実行しているスレッドを休止できる。以下の例は、毎回1秒休止して、カウントダウンを表示する。ただし、InterruptedExceptionクラスの例外を発生させる可能性があることに注意。"}
+{"index":{}}
+{"kougi":"第9回","page_id":11,"description":"スレッド間の同期（joinによる）複数のスレッドに実行の流れが分かった場合、それら全てが終了してから次の処理を進めなければならないことがある。各スレッドが部分和を計算し、その総和計算を一つのスレッドが行う場合などが、それに該当するスレッドtでの実行の終了を待ち合わせるには、t.join()を実行すればよい。ただし、InterruptedExceptionクラスの例外を発生させる可能性があることに注意。try{t.join();t1.join();}catch(Interrupted Exception e){ }"}
+{"index":{}}
+{"kougi":"第9回","page_id":12,"description":"練習問題10.2をやってみよう。リスト10.1(MPolygon.java)に、前頁のjoinを付加して、join()を確認します。完成版は、MPolygon2.javaとなっている。mainスレッドで、2つのスレッド（5角形と10角形を描画）の終了を確認後、描画を消す。"}
+{"index":{}}
+{"kougi":"第9回","page_id":13,"description":"synchronizedによる排他的実行リスト10.1(MPolygon.java)では、2つのスレッドt, t1には別のオブジェクトが、開始時に割当てられた。しかし、実行が進むにしたがい、スレッドは、様々なオブジェクトのメソッドを実行する場合がある。そのため、複数のスレッドで、同一オブジェクトが動作する状況がありえる。 その場合の不都合（予期しない動作）を観察する。その具体例が、リスト10.3 Thread10.javaである"}
+{"index":{}}
+{"kougi":"第9回","page_id":14,"description":"リスト10.3 Thread10.javaについての準備これまで、スレッドで起動させるオブジェクトntは、次の᷿ように作成した。NT nt = new NT();Thread t = new Thread(nt);class NT implements Runnable{public void run(){//スレッドで実行する処理内容}別法として、リスト10.3のように、Threadクラスのサブクラスのオブジェクトとして起動すḂこともできる：public class Thread10 extends Thread{public void run(){//スレッドで実行する処理内容}public static void main(String [] args){// Thread10オブジェクトt10を生成// t10.start();}}"}
+{"index":{}}
+{"kougi":"第9回","page_id":15,"description":"リスト10.3（Thread10.java）を実行してみよう。以下の2つのスレッドで、多角形と家形を描くつもりなので、右側の図になるはずだが、実際には左側のでたらめな図になる。その原因は、mainでは、Hturtleオブジェクトを1つだけ生成し、それが動作するスレッド（Thread10のオブジェクト）を2つ生成していることにある。この2つでの描画が重なった！不規則に。"}
+{"index":{}}
+{"kougi":"第9回","page_id":16,"description":"上記の不都合を回避すḂためにsynchronizedを使う。「練習問題10.3」のとおりに、HTurtleを修正して、Hturtle_syncを作って、それを使って、リスト10.3を再度実行してみよう。Hturtle_syncでは、メソッドpolygonとhouseの定義にsynchronizedという修飾子を付ける。あるスレッドがあるオブジェクト上でsynchronized付きメソッドを実行するとき、すでに他のスレッドが同じオブジェクト上のsynchronizedメソッド（どれでも）を実行中であれば、その実行終了を待つ。"}
+
+{"index":{}}
+{"kougi":"第10回","page_id":2,"description":"[今後の準備：例題と練習問題の設定]これまで、2つのEclipseプロジェクト「JavaEx」と「JavaAns」を使ってきました。Javaソースは、「turtle」というパッケージに入っていました。今後、「turtle」以外に、以下のパッケージを丸ごと、両プロジェクトのsrcへ設定して下さい。"}
+{"index":{}}
+{"kougi":"第10回","page_id":3,"description":"[今後の準備：例題と練習問題の設定]続き　今後使のプログラムでは、画像やテキストを入力とする場合があります。必要に応じて、それらを2つのEclipseプロジェクト「JavaEx」と「JavaAns」に設定して下さい。 画像やテキストを、プロジェクトへドラックすればよいです。"}
+{"index":{}}
+{"kougi":"第10回","page_id":5,"description":"[GUIクラスの種類]　Javaが提供するGUIクラス群には、SwingパッケージとAWTパッケージがある。GUI部品（コンポーネント）を表示したり、イベント処理（マウスやキーボードからの入力処理等）のクラスやインタフェースが、サブパッケージにグループ化されている。AWTパッケージ　コンポーネント、描画、配置、イベント処理を行う基本クラス群SwingパッケージAWTを拡張した高機能クラス群（AWTも同時に必要"}
+{"index":{}}
+{"kougi":"第10回","page_id":6,"description":"例えば、ボタンとスライダーを使えるようにするには、中間コンテナ(Jpanel等）へ、レイアウトを決めて、JButtonとJSliderを配置する。 中間コンテナを、トップレベルコンテナ（JFrame等）のコンテントペインという領域へ配置する。 それらのボタンとスライダーが画面に表示され、操作できるようになる。"}
+{"index":{}}
+{"kougi":"第10回","page_id":8,"description":"実際の画面での見え方、すなわち、フレームのLook&Feelは、それぞれのコンピュータのグラフィックス環境から、上図のように異なる。後述するが、Java独自デフォルトにするには、以下のように指定する：JFrame.setDefaultLookAndFeelDecorated(true);"}
+{"index":{}}
+{"kougi":"第10回","page_id":9,"description":"リスト11.1 (Hello.java)：JPanelへJLabelとJButtonを配置、JFrameへJPanelを配置"}
+{"index":{}}
+{"kougi":"第10回","page_id":10,"description":"BorderLayoutとは？では、JLabel 「こんにちは」を下に配置してみる。WESTとSOUTH空いているが、以下の実行で詰められる：frame.pack();//mainメソッド。なお、今回は、まだ、ボタンを押しても何も反応しません。"}
+{"index":{}}
+{"kougi":"第10回","page_id":11,"description":"ボタンとラベルには文字列以 練習問題11.1 (HelloIcon.java)：外にアイコンを貼る付けられる画像hello.gif,doron.gifは、このスライドの3枚目にしたがって設定してある必要があります。"}
+{"index":{}}
+{"kougi":"第10回","page_id":12,"description":"レイアウトマネージャーの設定と配置レイアウトを管理するレイアウトマネージャーを使うには、例えば、JPanelに対して、setLayoutメソッドを使う。引数はレイアウトクラス（以下の例では、BorderLayoutクラス）のオブジェクトを指定する。"}
+{"index":{}}
+{"kougi":"第10回","page_id":12,"description":"setLayoutは、this.setLayoutのことであり、HelloIconクラスはJPanelの性質を持つ。（それを継承している）"}
+{"index":{}}
+{"kougi":"第10回","page_id":14,"description":"JPanelを多重に使うと、より複雑なレイアウトも可能になるという例です。"}
+
+{"index":{}}
+{"kougi":"第11回","page_id":2,"description":"【今回の範囲】教科書pp.126-141 Swingコンポーネント コンポーネントのプロパティ　グラフィックス描画の概要　カスタムグラフィックス　基本図形の描画　なお、画像の描画関係は省略する。自習とする。）"}
+{"index":{}}
+{"kougi":"第11回","page_id":3,"description":"Swingコンポーネント多くのコンポーネントが使える。ここでは、例題や練習問題に出てくるものを簡単に説明するが、その他のコンポーネントを含む詳細については、下記のドキュメントを参照して下さい。http://docs.oracle.com/javase/jp/8/docs/api/index.html"}
+{"index":{}}
+{"kougi":"第11回","page_id":11,"description":"カスタムグラフィックス：1) 前回までは、ウインドウにボタンやラベルを表示した。それらの描画はJavaのコンポーネントクラスに任せており、プログラムでは配置を指示すだけだった。2) ここからは、独自の図形や画像を描くこと（カスタムグラフィックス）を学ぶ。3) そのような描画の概要は以下のとおりである：a) コンポーネントのサブクラスを定義する。b) その中の以下のメソッドを自分用に再定義する：protected void paintComponent(Graphics g){//まず親クラスのpaintComponentを呼び出す。（初期化）//これ以降、自分用の図形等描画動作を指示。 //システムからGraphicsクラスのオブジェクトgが渡されるので、//gが持つ描画メソッド（直線、円などを描画）を使う。}a) このメソッドは、システムが「描画が必要」と判断した時に、自動的に呼び出される。それによって、グラフィックスが画面に出てくる。"}
+{"index":{}}
+{"kougi":"第11回","page_id":12,"description":"リスト12.1　CustomGraphics.java"}
+{"index":{}}
+{"kougi":"第11回","page_id":13,"description":"コンポーネントの座標系：個々に整数座標系を持ち、左上角が(0,0)幅を得るためのメソッドint getWidth()高さを得るためのメソッド　int getHeight() 外側の座標空間での左上角の位置を得るためのメソッド Point getLocation()・描画のタイミングとrepaintメソッド：基本的には、paintComponentメソッドが自動的に呼ばれて描画が行われるが、必要に応じて、以下のrepaintメソッドで、明示的に再描画する："}
+{"index":{}}
+{"kougi":"第11回","page_id":14,"description":"Graphicsクラスの図形描画メソッド　リスト12.1に一例を示したように、円や直線などの基本図形を描くには、Graphicsクラスの描画メソッドを使う。 直線、四角、楕円、円弧、折れ線、多角形、文字、色指定、フォント指定などのメソッドがある。（→pp.139-140の仕様を参照）Graphicsオブジェクトgに対して、以下のように呼び出す："}
+{"index":{}}
+{"kougi":"第11回","page_id":15,"description":"練習問題12.1 CustomGraphics2.java"}
+{"index":{}}
+{"kougi":"第11回","page_id":16,"description":"練習問題12.2 Doushin.java, Housha.java"}
+
+{"index":{}}
+{"kougi":"第12回","page_id":3,"description":"イベントの種類とイベントリスナーイベントリスナーの機能をクラスに持たせるには、イベントの種類に応じて用意されているリスナーインタフェースを実装（implements）する。"}
+{"index":{}}
+{"kougi":"第12回","page_id":5,"description":"イベントリスナーとなるクラスでは、対応メソッドの内容を実装するリスナーインタフェースには、イベント処理用のメソッドが指定されている。リスナーとなるクラスでは、受け取ったイベントに応じた処理を、それらのメソッドの定義内容として書く"}
+{"index":{}}
+{"kougi":"第12回","page_id":6,"description":"[例] ActionListenerのメソッドの実装の仕方：例えば、ボタンクリックで発生するActionEventを処理するには、ActionListenerをインプリメントしたリスナークラスのなかで、actionPerformedメソッドの中にその処理内容を書く。class MyProgram implements ActionListener{public void actionPerformed(ActionEvent e){//ここにActionEventに応じた処理を記述}}もしも、このMyProgramで、actionPerformedというメソッドを実装していない場合はコンパイルエラーとなる。このMyProgramというクラスは、GUI表示部分とは別のクラスになっている。すなわち、JPanelをextendsしていない。このように、GUI部とイベント処理部を分離することは、保守や拡張をしやすくする。（→リスト13.6で再度説明する。）"}
+{"index":{}}
+{"kougi":"第12回","page_id":7,"description":"イベントソースでのリスナーの登録：イベントソースで起こったどのイベントをリスナーで処理するのか、それをイベントソースに設定しておくこと。その設定は、コンポーネントが持つリスナー追加メソッドで行う。例えば、JButtonオブジェクトbuttonで発生したActionEventを処理するリスナー（オブジェクト listener）を設定するには、以下のようにする。button.addActionListener(listener);コンポーネント上では、マウスやキーボードの操作で様々な種類のイベントが発生する。そこで、このリスナー登録は、プログラムにとって必要な（関心のある）イベントだけを処理できるようにしているのである。イベントソースにリスナーを設定しなければ、イベントは誰にも伝えられずに、無視される。"}
+{"index":{}}
+{"kougi":"第12回","page_id":8,"description":"リスト13.1 Hello.java（ボタン）"}
+{"index":{}}
+{"kougi":"第12回","page_id":9,"description":"リスト13.1 Hello.java"}
+{"index":{}}
+{"kougi":"第12回","page_id":10,"description":"リスト13.1 Hello.java"}
+{"index":{}}
+{"kougi":"第12回","page_id":11,"description":"リスト13.2 Standup.java チェックボックス"}
+{"index":{}}
+{"kougi":"第12回","page_id":12,"description":"リスト13.2 Standup.java"}
+{"index":{}}
+{"kougi":"第12回","page_id":14,"description":"リスト13.4 DrawByMouse.java マウスイベント"}
+{"index":{}}
+{"kougi":"第12回","page_id":15,"description":"「内部クラス」というもの：クラスの中に作られるクラス内部クラスの中から、内部クラスを包含するクラスのインスタンス変数へアクセスできるので便利である。"}
+{"index":{}}
+{"kougi":"第12回","page_id":17,"description":"リスト13.6 DrawByMouseIn.java前のスライドで示した以下の事項を確認するための例です。イベントソースのクラスと、イベントリスナーのクラスを分離して、プログラムの構造を明確にする。イベントリスナーのクラスを内部クラスとして作成する。"}
+
+{"index":{}}
+{"kougi":"第13回","page_id":3,"description":"入出力ストリームJavaでの入出力はjava.ioパーケージあるストリームクラスと呼ばれる一連のクラスを利用。「ストリーム」とはデータの出入ḁ口という意味。 ストリームオブジェクトを生成して，そのオブジェクトの持つ読み書きのためのメソッド（read/write）を使う。"}
+{"index":{}}
+{"kougi":"第13回","page_id":4,"description":"[例]キーボードからの入力文字を画面に表示するキーボードからの入力ストリームSystem.inが元になる。このストリームは、明示的にそのオブジェクトを生成しなくても使える。これを元にInputStreamReaderというストリームオブジェクトisrを作成。InputStreamReader isr = new InputStreamReader(System.in);このisrはキーボードからの入力を1文字づつ読むためのread()メソッドなどを持つ。しかし、これでは能率が悪いので、行単位に読み込みたい場合が多い。そのため、このisrを元にさらに高機能の（上位の）ストリームオブジェクトを生成する。すなわち、下記のように、BufferedReaderオブジェクトを生成する。BufferedReader br = new BufferedReader(isr);このオブジェクトbrは、行単位の読込みメソッドreadLine()を持つ。"}
+{"index":{}}
+{"kougi":"第13回","page_id":5,"description":"[続き]br.readLine()によって、キーボードから入力してリターンを押した区切りで、まとめて読み込むことができる。通常、上記2段階に渡りオブジェクトの生成を以下のように1つのステートメントにする。BufferedReader br =new BufferedReader(new InputStreamReader(System.in));次の図を良くみて見よう！"}
+{"index":{}}
+{"kougi":"第13回","page_id":7,"description":"冗長ではないか？「キーボードから1行読込むメソッド」をそのまま提供すれば良いのではないか→前図から、Javaの思想が分かり、その疑問はある程度解消するだろう。例えば、ディスクのテキストファイルを読込むためのFileReaderストリームクラスが用意されている。ファイル名を与えてそのクラスのオブジェクトを生成する。キーボード場合と同様に、そのオブジェクトは低レベルの読込み機能は持っている。行単位に読み込みたい場合は、そのFileReaderオブジェクトから，BufferedReaderオブジェクトを生成する。このBufferedReaderは，キーボード、ディスクファイル、ネットワークソケット等に依らずに、行単位読み込みなどの高機能を提供するストリームである。各入力デバイス毎に個別に高機能の読み込み機能を用意するとしたら、似ていて少しづつ異なるものが多数存在することにより、メンテナンス性や必要機能を作り出す柔軟さに欠ける。  →再度、前図を見る"}
+{"index":{}}
+{"kougi":"第13回","page_id":8,"description":"主な文字ストリーム（文字データ入出力用）のクラスの継承関係"}
+{"index":{}}
+{"kougi":"第13回","page_id":9,"description":"主なバイトストリーム（音声、画像等のバイナリデータ入出力用）のクラスの継承関係"}
+{"index":{}}
+{"kougi":"第13回","page_id":10,"description":"例外処理が必要：すでにtry〜catch例外処理は学んだが、ここでも重要。ストリームクラスの多くのメソッドは、例外を発生する可能性がある"}
+{"index":{}}
+{"kougi":"第13回","page_id":10,"description":"try{}catch(IOException e){System.out.println(e);}入出力処理で例外発生した場合（例）入力ファイルが存在しないjava.io.FileNotFoundException:in.txt (No such file or directory)（注1）ここでは、IOExceptionクラスの例外をcatchする。この代わりに、Exceptionクラスを指定すると、すべての例外がcatchされる。（注2）例外は必ずしもここで処理する必要はない。たとえば、次ページの例のように、throws IOExceptionと書いて（つまり、例外を転送して）、そのメソッドの呼び出し側（main）でtry〜catchしてもよい"}
+{"index":{}}
+{"kougi":"第13回","page_id":11,"description":"ファイルのコピー（15.1 FileReadWrite.java）"}
+{"index":{}}
+{"kougi":"第13回","page_id":12,"description":"ファイルを行毎に読んで表示（15.3 FileReadWrite2.java）"}
+{"index":{}}
+{"kougi":"第13回","page_id":13,"description":"簡単なテキストエディタ（15.5 TextEditor.java）"}
+{"index":{}}
+{"kougi":"第13回","page_id":14,"description":"切り文字による入力解析：1) テキストファイル data.txtには、区切記号（デフォルトでは半角空白）で区切られたdouble型データやString型データを入れておく。2) Scannerオブジェクトscには、data.txtの内容を区切り記号でトークンに分割した結果が入る。Scanner sc = new Scanner(new BufferedReader(new FileReader(“data.txt”)));3) 以下のようにして、このトークンを走査して、double型データの合計sumを計算する。while (sc.hasNextDouble()){ sum += sc.nextDouble(); }"}
+
+{"index":{}}
+{"kougi":"第14回","page_id":3 ,"description":"コレクションフレームワーク：「コレクション」とは、オブジェクトの集まりを表すオブジェクトである。コレクション機能のコアは、以下に示す一連のインタフェースである。"}
+{"index":{}}
+{"kougi":"第14回","page_id":4,"description":"ジェネリクス：コレクションでは、どのクラスのオブジェクトを要素として保持するのかを、型パラメータ <型名>を指定する。例えば、以下のようにする：Integer型のオブジェクトを保持するArrayListならば、ArrayList<Integer>String型のオブジェクトを保持するArrayListならば、ArrayList<String>型パラメータをとるクラス（インタフェース）をジェネリッククラス（ジェネリックインタフェース）と呼ぶ。例えば、ジェネリッククラスであるArrayListのAPIには、ArrayList<E>と書かれている。<E>は、一つの型をパラメータとして指定することを表す。格納できるのはオブジェクトである。プリミティブ型の値を保持するには、対応するラッパークラスのオブジェクトを利用することになる。ただし、コレクションに出し入れする際に、プリミティブ型とラッパー型の型変換は自動的に行われる。Boxing機能、Unboxing機能である。したがって、プリミティブ型をそのまま格納するような形で書ける。"}
+{"index":{}}
+{"kougi":"第14回","page_id":5,"description":"■rrayListクラス（ジェネリクスクラスの一つ）：要素を整数インデックスによって順序付けてリストとして保持する。挿入(add)、削除(remove)、存在問い合わせ(contain)、参照(get)、探索(indexOf)機能を持つ。以下の仕様で<E>は型パラメータを意味する。"}
+{"index":{}}
+{"kougi":"第14回","page_id":6,"description":"ArrayListで平均計算（17.1 ArrayListAve.java）"}
+{"index":{}}
+{"kougi":"第14回","page_id":7,"description":"ArrayListとLinkedList"}
+{"index":{}}
+{"kougi":"第14回","page_id":8,"description":"Iteratorインタフェース（これもジェネリクス）コレクションの要素全体を順にアクセスするために使う。反復子とも言う。以下の仕様で<E>は型パラメータを意味する。"}
+{"index":{}}
+{"kougi":"第14回","page_id":9,"description":"HashMapクラス（これもジェネリクス）キー（key）と値(value)のペアを保存し、取出しができる。以下の仕様の型パラメータ<K, V>で、Kはkeyオブジェクトのクラス、vはvalueオブジェクトのクラスを表す。コンストラクタとメソッドの概要を示す。（→詳細は、教科書p.240参照）"}
+{"index":{}}
+{"kougi":"第14回","page_id":9,"description":"[コンストラクタ]HashMap()：デフォルトコンストラクタHashMap(int initCapa, float factor)：引数付きコンストラクタ"}
+{"index":{}}
+{"kougi":"第14回","page_id":9,"description":"[メソッド]boolean containsKey(Object key)：特定のkeyの存在確認　boolean containsValue(Object value)：特定のvalueの存在確認get(Object key)：keyを指定してvalueを得るSet<K> keySet()：key全体をSetとして返すput(K key, V value)：keyとvalueのペアを格納remove(Object key)：指定されたkeyを削除int size()：keyとvalueのペアの数を返すCollection<V> values()：格納されているvalue全体をCollectionとして返す"}
+{"index":{}}
+{"kougi":"第14回","page_id":10,"description":"HashMap利用例（リスト17.2 HashMapAsk.java） "}
+{"index":{}}
+{"kougi":"第14回","page_id":11,"description":"HashMap利用例（リスト17.2 HashMapAsk.java）：実行する前に、「何をしようとしているのか」を、前スライドで確認！以下のような内容となっている：1) 最初に、HashMapオブジェクトmapを生成。2) テキストファイルlistdata.txtを読み込んで、Scannerを利用して「名前、体重、身長」を分離。3) 「体重と身長」はHdataオブジェクトとして生成。4) 体重をkey、Hdataオブジェクトをvalueとして、全員の分をmapへ格納する。すなわち、map.put(key, value)を実行。5) 実行時パラメータとして”緑田”を与える。6) その情報から、map.get(”緑田”)を実行し、valueであるHdataオブジェクト（体重、身長）を得る。"}
+{"index":{}}
+{"kougi":"第14回","page_id":12,"description":"ArraysクラスとCollectionsクラスともに、探索、整列などの機能を提供すḂユーティリティクラスArraysは、配列を操作すḂ様々なクラスメソッド提供Collectionsは、主にリストを処理すḂ様々なクラスメソッド提供一例として、Collectionsのshuffleメソッドを使った例を次のスライドで検討する。"}
+{"index":{}}
+{"kougi":"第14回","page_id":13,"description":"shuffleメソッドの利用例（リスト17.3 ArrayCard.java） "}
